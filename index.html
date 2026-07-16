@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stavební společnost SKELETA s.r.o. — Rodinné domy na klíč a rekonstrukce | Kyjov</title>
-<meta name="description" content="Stavební společnost SKELETA s.r.o. z Kyjova staví rodinné domy na klíč a provádí kompletní rekonstrukce na jižní Moravě. Přes 10 let zkušeností, finanční rating A+.">
+<title>Stavební společnost SKELETA s.r.o. — bytové domy, průmyslové objekty i rodinné domy | Kyjov</title>
+<meta name="description" content="Stavební společnost SKELETA s.r.o. z Kyjova staví bytové a rodinné domy, průmyslové objekty i občanskou vybavenost a obnovuje historické budovy. Přes 10 let zkušeností na jižní Moravě.">
 <link rel="canonical" href="https://skeleta.cz/">
 <link rel="preload" as="image" href="/img/hero.jpg">
 <meta name="theme-color" content="#17130f">
@@ -15,8 +15,8 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="cs_CZ">
 <meta property="og:site_name" content="Stavební společnost SKELETA s.r.o.">
-<meta property="og:title" content="SKELETA — rodinné domy na klíč a rekonstrukce | Kyjov">
-<meta property="og:description" content="Místní stavební firma z Kyjova. Rodinné domy na klíč a kompletní rekonstrukce na jižní Moravě. Přes 10 let zkušeností.">
+<meta property="og:title" content="SKELETA — stavby pro rodiny, firmy i města | Kyjov">
+<meta property="og:description" content="Bytové a rodinné domy, průmyslové objekty, občanská vybavenost, zpevněné plochy i historické budovy. Stavební společnost z Kyjova, od roku 2016.">
 <meta property="og:url" content="https://skeleta.cz/">
 <meta property="og:image" content="https://skeleta.cz/img/hero.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -44,20 +44,6 @@
   "openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"08:00","closes":"16:00"}]
 }
 </script>
-<script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"FAQPage",
-  "mainEntity":[
-    {"@type":"Question","name":"Kolik bude stavba nebo rekonstrukce stát?","acceptedAnswer":{"@type":"Answer","text":"Orientační rozpětí si spočítáte v kalkulačce na webu. Přesnou cenu dáme po bezplatném zaměření na místě — každá stavba je jiná."}},
-    {"@type":"Question","name":"Jak dlouho realizace trvá?","acceptedAnswer":{"@type":"Answer","text":"Záleží na rozsahu — od několika dní u dlažby po měsíce u domu na klíč. Termín uvádíme ve smlouvě o dílo a držíme ho."}},
-    {"@type":"Question","name":"Kam dojedete? Jakou oblast pokrýváte?","acceptedAnswer":{"@type":"Answer","text":"Primárně Kyjovsko a okres Hodonín, po domluvě celá jižní Morava."}},
-    {"@type":"Question","name":"Pomůžete mi i s dotací?","acceptedAnswer":{"@type":"Answer","text":"Ano. Jsme zapsaní v seznamu odborných dodavatelů a poradíme s programem Nová zelená úsporám."}},
-    {"@type":"Question","name":"Dáváte na práci záruku?","acceptedAnswer":{"@type":"Answer","text":"Ano, na dílo poskytujeme záruku a jsme k dispozici i po předání."}},
-    {"@type":"Question","name":"Jak začneme spolupráci?","acceptedAnswer":{"@type":"Answer","text":"Stačí zavolat nebo vyplnit nezávaznou poptávku. Ozveme se, domluvíme zaměření a připravíme nabídku — zdarma a bez závazku."}}
-  ]
-}
-</script>
 
 <!-- ============================================================
      SKELETA s.r.o. — první nástřel webu (v1)
@@ -70,7 +56,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 /* ===== Design tokens ===== */
@@ -91,16 +77,14 @@
   --accent-tint:#f5e9f0;         /* světlý švestkový podklad (focus ring, bloky) */
   --accent-on-dark:#cf9dbe;      /* světlá švestková na tmavém povrchu */
 
-  --radius:8px;               /* sjednocený rádius rodiny SKELETA+VESTARA */
+  --radius:8px;
   --radius-sm:6px;
   --shadow:0 1px 2px rgba(27,23,20,.05), 0 12px 34px rgba(27,23,20,.07);
   --shadow-sm:0 1px 2px rgba(27,23,20,.05), 0 4px 14px rgba(27,23,20,.05);
   --ease:0.33s cubic-bezier(.2,.6,.2,1);
   --maxw:1240px;
-  /* Typografie: SKELETA = technický grotesk na nadpisy/wordmark, Inter tělo (sdílené s VESTAROU).
-     --serif zůstává jen pro wordmark VESTARY v cross-sell bandu. */
+  /* Typografie: SKELETA = technický grotesk na nadpisy/wordmark, Inter na tělo. */
   --display:'Space Grotesk','Inter',-apple-system,Arial,sans-serif;
-  --serif:'Cormorant Garamond',Georgia,'Times New Roman',serif;
   --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;
 }
 
@@ -182,15 +166,6 @@ section{scroll-margin-top:118px}
 .header.scrolled .nav-links a:hover{background:var(--surface-alt)}
 .header .nav-toggle{color:#fff}
 .header.scrolled .nav-toggle{color:var(--ink)}
-/* Groupbar — přepínač mezi firmami skupiny */
-.groupbar{background:var(--ink)}
-.gb-inner{display:flex;align-items:center;gap:11px;height:38px;font-size:.78rem}
-.gb-label{text-transform:uppercase;letter-spacing:.16em;font-size:.62rem;color:rgba(255,255,255,.4)}
-.gb-link{color:rgba(255,255,255,.72);font-weight:600;transition:color var(--ease)}
-.gb-link:hover{color:#fff}
-.gb-link.is-active{color:var(--accent-on-dark);cursor:default}
-.gb-sep{color:rgba(255,255,255,.26)}
-@media(max-width:680px){.groupbar{display:none}}
 /* Reálné logo v hlavičce na světlé destičce (čitelné přes hero i na světlé liště) */
 .brand-logo{height:34px;width:auto;display:block}
 .header .brand{padding:7px 13px;border-radius:var(--radius-sm);background:rgba(255,255,255,.93);
@@ -377,11 +352,7 @@ section{scroll-margin-top:118px}
 /* ===== Rozšíření v2: enrich sekcí + delight prvky ===== */
 
 /* Rytmus pozadí sekcí */
-.process{background:var(--surface-alt)}
-.calc-sec{background:var(--bg)}
-.dotace-sec{background:var(--bg)}
 .reviews{background:var(--surface-alt)}
-.faq-sec{background:var(--bg)}
 
 /* Služby — seznam „co obsahuje" */
 .svc-list{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:8px;list-style:none}
@@ -414,45 +385,6 @@ section{scroll-margin-top:118px}
   background:rgba(20,22,26,.82);color:#fff;padding:5px 11px;border-radius:var(--radius-sm)}
 .ba-tag.before{left:16px}.ba-tag.after{right:16px}
 
-/* Kalkulačka */
-.calc-wrap{display:grid;grid-template-columns:1.05fr .95fr;border:1px solid var(--line);
-  border-radius:var(--radius);overflow:hidden}
-.calc-controls{padding:48px;background:var(--bg)}
-.calc-result{padding:48px;background:var(--ink);color:#fff;display:flex;flex-direction:column;justify-content:center}
-.calc-field{margin-bottom:30px}
-.calc-field:last-child{margin-bottom:0}
-.calc-field .fl{display:flex;justify-content:space-between;align-items:baseline;font-size:.85rem;font-weight:600;color:var(--ink);margin-bottom:14px}
-.calc-field .fl .val{font-weight:700;color:var(--ink)}
-.seg{display:flex;flex-wrap:wrap;border:1px solid var(--line-strong);border-radius:2px;overflow:hidden}
-.seg button{flex:1;min-width:fit-content;padding:11px 16px;background:#fff;border:0;border-right:1px solid var(--line-strong);
-  font-family:inherit;font-size:.88rem;color:var(--body);cursor:pointer;white-space:nowrap;
-  transition:background var(--ease),color var(--ease)}
-.seg button:last-child{border-right:0}
-.seg button.active{background:var(--ink);color:#fff}
-input[type=range]{width:100%;accent-color:var(--ink);height:6px;cursor:pointer}
-.calc-result .cr-label{font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;color:#8a8f97}
-.calc-price{font-size:clamp(1.7rem,3.6vw,2.6rem);font-weight:700;letter-spacing:-.02em;line-height:1.1;margin:8px 0 4px}
-.calc-sub{color:#b7bbc1;font-size:.92rem}
-.calc-disclaimer{font-size:.76rem;color:#8a8f97;margin-top:20px;border-top:1px solid rgba(255,255,255,.13);padding-top:16px}
-.calc-result .btn-primary{background:#fff;color:var(--ink);border-color:#fff;margin-top:24px}
-.calc-result .btn-primary:hover{background:#e9e9e7}
-/* Hypotéka */
-.cm-head{margin:48px 0 22px}
-.cm-head h3{font-size:clamp(1.3rem,2.4vw,1.7rem);margin-top:6px}
-.cm-lead{font-size:.9rem;color:var(--muted);margin-bottom:26px;padding-bottom:22px;border-bottom:1px solid var(--line)}
-.cm-lead b{color:var(--ink)}
-
-/* Dotace band */
-.dotace-band{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;
-  border:1px solid var(--line);border-radius:var(--radius);padding:56px;background:var(--surface-alt)}
-.dotace-band h2{font-size:clamp(1.7rem,3vw,2.4rem);margin-bottom:16px}
-.dotace-steps{list-style:none;display:flex;flex-direction:column;gap:18px}
-.dotace-steps li{display:flex;gap:16px;align-items:flex-start}
-.dotace-steps .ds-n{flex:none;width:30px;height:30px;border-radius:50%;background:var(--ink);color:#fff;
-  display:grid;place-items:center;font-size:.85rem;font-weight:700}
-.dotace-steps .ds-t b{color:var(--ink)}
-.dotace-steps .ds-t{font-size:.92rem;color:var(--muted)}
-
 /* Recenze */
 .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
 .rev{background:var(--bg);border:1px solid var(--line);border-radius:var(--radius);padding:32px;display:flex;flex-direction:column}
@@ -464,17 +396,6 @@ input[type=range]{width:100%;accent-color:var(--ink);height:6px;cursor:pointer}
   color:var(--muted);font-weight:700;font-size:.95rem;flex:none}
 .rev-who b{display:block;color:var(--ink);font-size:.9rem}
 .rev-who span{font-size:.8rem;color:var(--faint)}
-
-/* FAQ */
-.faq-list{max-width:840px;margin:0 auto;border-top:1px solid var(--line)}
-.faq-item{border-bottom:1px solid var(--line)}
-.faq-q{width:100%;text-align:left;background:none;border:0;padding:24px 0;display:flex;justify-content:space-between;
-  gap:24px;align-items:center;cursor:pointer;font-size:1.06rem;font-weight:600;color:var(--ink)}
-.faq-ico{flex:none;width:22px;height:22px;color:var(--muted);transition:transform var(--ease)}
-.faq-item.open .faq-ico{transform:rotate(45deg)}
-.faq-a{max-height:0;overflow:hidden;visibility:hidden;transition:max-height var(--ease),visibility 0s linear .35s}
-.faq-item.open .faq-a{visibility:visible;transition:max-height var(--ease),visibility 0s linear 0s}
-.faq-a p{padding:0 40px 26px 0;color:var(--muted);max-width:72ch}
 
 /* Sticky mobil „Zavolat" */
 .callbar{position:fixed;left:0;right:0;bottom:0;z-index:90;display:none;gap:1px;background:var(--line-strong);
@@ -488,8 +409,7 @@ input[type=range]{width:100%;accent-color:var(--ink);height:6px;cursor:pointer}
 
 /* Jemné stíny + zaoblení na kartách */
 .svc-grid{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
-.ref-card,.ref-feature,.rev,.calc-wrap,.form,.dotace-band{box-shadow:var(--shadow)}
-.seg{border-radius:var(--radius-sm)}
+.ref-card,.ref-feature,.rev,.form{box-shadow:var(--shadow)}
 .ref-badge,.step-time,.placeholder-note{border-radius:999px}
 
 /* Viditelný focus pro klávesnici */
@@ -529,10 +449,6 @@ textarea:focus-visible,[role=slider]:focus-visible{outline:2px solid var(--accen
 .person .p-info span{font-size:.86rem;color:var(--muted)}
 .person .p-call{margin-left:auto;font-weight:600;color:var(--accent);white-space:nowrap}
 
-/* Tým foto v O nás */
-.about-photo{margin-top:28px;height:150px;border-radius:var(--radius);overflow:hidden;position:relative}
-.about-photo .photo-slot{width:100%;height:100%}
-
 /* Mapa */
 .map-wrap{margin-top:28px;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm)}
 .map-wrap iframe{width:100%;height:280px;border:0;display:block;filter:grayscale(.25) contrast(.95)}
@@ -565,27 +481,28 @@ textarea:focus-visible,[role=slider]:focus-visible{outline:2px solid var(--accen
 .rev-agg .stars svg{width:16px;height:16px}
 .rev-agg small{font-weight:400;color:var(--muted)}
 
-/* Cross-sell band → VESTARA (hotové domy) */
-.crosssell{background:var(--ink);color:#e8e2d8}
-.crosssell .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
-.crosssell .eyebrow{color:var(--accent-on-dark)}
-.crosssell h2{color:#fff;font-size:clamp(1.8rem,3.2vw,2.6rem);margin-bottom:18px}
-.crosssell p{color:#b7afa4;margin-bottom:26px;max-width:52ch}
-.crosssell .btn-primary{background:#fff;color:var(--ink);border-color:#fff}
-.crosssell .btn-primary:hover{background:#e9e9e7}
-.xs-card{border:1px solid rgba(255,255,255,.14);border-radius:var(--radius);padding:34px;background:rgba(255,255,255,.03);transition:background var(--ease)}
-.xs-card:hover{background:rgba(255,255,255,.06)}
-.xs-brand{display:flex;align-items:center;gap:12px;margin-bottom:20px}
-.xs-brand .xn{font-family:var(--serif);font-weight:700;letter-spacing:.12em;color:#fff;font-size:1.35rem;line-height:1}
-.xs-brand .xn small{display:block;font-size:.56rem;letter-spacing:.34em;color:#d8bd86;text-transform:uppercase;margin-top:4px;font-family:var(--sans);font-weight:600}
-.xs-prop{display:flex;gap:16px;align-items:center;border-top:1px solid rgba(255,255,255,.12);padding-top:20px}
-.xs-prop .xp-photo{width:88px;height:66px;border-radius:var(--radius-sm);flex:none;overflow:hidden;position:relative;background:#2a231d}
-.xs-prop .xp-photo .photo-slot{width:100%;height:100%}
-.xs-prop .xp-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.xs-prop .xp-info b{color:#fff;display:block;font-size:.95rem}
-.xs-prop .xp-info span{font-size:.84rem;color:#b7afa4}
-.xs-prop .xp-price{margin-left:auto;color:#d8bd86;font-weight:700;font-family:var(--serif);font-size:1.2rem;white-space:nowrap}
-@media(max-width:820px){.crosssell .wrap{grid-template-columns:1fr;gap:36px}}
+/* Připravujeme — tmavý band s teaser projekty */
+.upcoming{background:var(--ink);color:#c9ccd1}
+.upcoming .eyebrow{color:var(--accent-on-dark)}
+.upcoming h2{color:#fff}
+.upcoming .lead{color:#b7bbc1}
+.upcoming .placeholder-note{color:#a99e8f;border-color:rgba(255,255,255,.2)}
+.upcoming .placeholder-note::before{background:var(--accent-on-dark)}
+.upcoming-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.up-card{border:1px solid rgba(255,255,255,.14);border-radius:var(--radius);overflow:hidden;
+  background:rgba(255,255,255,.03);transition:background var(--ease),transform var(--ease),box-shadow var(--ease)}
+.up-card:hover{background:rgba(255,255,255,.06);transform:translateY(-4px)}
+.up-photo{position:relative;height:190px}
+.up-photo .photo-slot{width:100%;height:100%}
+.up-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:2}
+.up-badge{position:absolute;top:14px;left:14px;z-index:3;font-size:.68rem;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;background:var(--accent);color:#fff;padding:5px 11px;border-radius:999px}
+.up-body{padding:24px 26px}
+.up-body h3{color:#fff;font-size:1.12rem;margin-bottom:8px}
+.up-body p{color:#a99e8f;font-size:.9rem;margin-bottom:14px}
+.up-cat{font-size:.78rem;font-weight:600;letter-spacing:.04em;color:var(--accent-on-dark)}
+@media(max-width:960px){.upcoming-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:680px){.upcoming-grid{grid-template-columns:1fr}}
 
 /* ===== v4: level-up — pohyb, marquee, progress, detaily ===== */
 
@@ -596,10 +513,6 @@ textarea:focus-visible,[role=slider]:focus-visible{outline:2px solid var(--accen
 
 /* Scroll progress — tenká švestková linka nahoře */
 .scroll-progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--accent);z-index:300;pointer-events:none}
-
-/* Groupbar se při scrollu sbalí (šetří místo); visibility kvůli fokusu z klávesnice */
-.groupbar{max-height:38px;overflow:hidden;visibility:visible;transition:max-height var(--ease),visibility 0s linear 0s}
-.header.scrolled .groupbar{max-height:0;visibility:hidden;transition:max-height var(--ease),visibility 0s linear .35s}
 
 /* Marquee — běžící pruh služeb/lokalit (SEO slova + život) */
 .marquee{overflow:hidden;background:var(--ink);border-block:1px solid var(--ink);padding:13px 0}
@@ -638,8 +551,8 @@ textarea:focus-visible,[role=slider]:focus-visible{outline:2px solid var(--accen
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E")}
 
 /* Zrno i na tmavých sekcích — konzistentní kino-textura */
-.about,.crosssell{position:relative}
-.about::after,.crosssell::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
+.about,.upcoming{position:relative;overflow:hidden}
+.about::after,.upcoming::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E")}
 
 /* Švestkový duotone nádech hero fotky — sladí fotku se značkou */
@@ -679,7 +592,7 @@ html{scrollbar-color:var(--accent) var(--surface-alt)}
 
 /* Číselná disciplína */
 .trust-item .num{font-size:2.5rem;font-variant-numeric:tabular-nums}
-.calc-price,.ref-price{font-variant-numeric:tabular-nums}
+.ref-price{font-variant-numeric:tabular-nums}
 
 /* Typografická sazba — vyvážené nadpisy */
 h1,h2,h3{text-wrap:balance}
@@ -701,8 +614,6 @@ h1,h2,h3{text-wrap:balance}
 
 /* ===== Responsive ===== */
 @media(max-width:960px){
-  .calc-wrap{grid-template-columns:1fr}
-  .dotace-band{grid-template-columns:1fr;gap:32px;padding:40px}
   .rev-grid{grid-template-columns:1fr}
   .section-pad{padding:88px 0}
   .svc-grid{grid-template-columns:repeat(2,1fr)}
@@ -738,9 +649,7 @@ h1,h2,h3{text-wrap:balance}
   .callbar{display:flex}
   body{padding-bottom:54px}
   .ba{min-height:300px}
-  .calc-controls,.calc-result{padding:32px}
   .rev-grid{grid-template-columns:1fr}
-  .faq-a p{padding-right:0}
   .nav-links a.nav-phone{display:none}
   .person{flex-wrap:wrap}
   .person .p-call{margin-left:0;width:100%;padding-top:6px}
@@ -753,14 +662,6 @@ h1,h2,h3{text-wrap:balance}
 
 <!-- ============ HEADER ============ -->
 <header class="header" id="header">
-  <div class="groupbar">
-    <div class="wrap gb-inner">
-      <span class="gb-label">Skupina</span>
-      <a href="/" class="gb-link is-active">SKELETA</a>
-      <span class="gb-sep">·</span>
-      <a href="https://blacktalon.cz/vestara/" class="gb-link">VESTARA — developerský partner</a>
-    </div>
-  </div>
   <div class="wrap nav">
     <a href="#top" class="brand" aria-label="SKELETA — Stavební společnost">
       <img class="brand-logo" src="/img/logo.png" alt="SKELETA — Stavební společnost">
@@ -769,10 +670,8 @@ h1,h2,h3{text-wrap:balance}
     <nav class="nav-links" id="navlinks">
       <a href="#sluzby">Služby</a>
       <a href="#reference">Reference</a>
-      <a href="#kalkulacka">Ceník</a>
       <a href="/pujcovna.html">Půjčovna</a>
       <a href="#o-nas">O nás</a>
-      <a href="#faq">FAQ</a>
       <a href="#kontakt">Kontakt</a>
       <a href="tel:+420725051860" class="nav-phone" aria-label="Zavolejte nám">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3-8.6A2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .4 1.9.7 2.8a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.3-1.2a2 2 0 012.1-.5c.9.3 1.8.6 2.8.7a2 2 0 011.8 2z"/></svg>
@@ -823,9 +722,9 @@ h1,h2,h3{text-wrap:balance}
   <div class="wrap">
     <div class="hero-content">
       <span class="eyebrow">Kyjov · jižní Morava · od roku 2016</span>
-      <h1>Stavíme domy, <span class="thin">ve kterých se dobře žije.</span></h1>
-      <p>Rodinné domy na klíč a kompletní rekonstrukce od místní stavební firmy,
-         které stojí za svojí prací. Přes 10 let zkušeností na jižní Moravě.</p>
+      <h1>Stavíme pro rodiny, <span class="thin">firmy i města.</span></h1>
+      <p>Bytové a rodinné domy, průmyslové objekty, občanská vybavenost i citlivá obnova
+         historických budov. Stavební společnost z Kyjova s více než 10 lety zkušeností na jižní Moravě.</p>
       <div class="hero-actions">
         <a href="#kontakt" class="btn btn-primary btn-lg btn-arr">Nezávazná poptávka</a>
         <a href="#reference" class="btn btn-ghost btn-lg">Naše realizace</a>
@@ -848,8 +747,8 @@ h1,h2,h3{text-wrap:balance}
 <!-- ============ MARQUEE ============ -->
 <div class="marquee" aria-hidden="true">
   <div class="marquee-track">
-    <span>Rodinné domy na klíč</span><span>Rekonstrukce</span><span>Zámková dlažba</span><span>Drenáže základů</span><span>Demolice</span><span>Kyjov</span><span>Jižní Morava</span><span>Od roku 2016</span>
-    <span>Rodinné domy na klíč</span><span>Rekonstrukce</span><span>Zámková dlažba</span><span>Drenáže základů</span><span>Demolice</span><span>Kyjov</span><span>Jižní Morava</span><span>Od roku 2016</span>
+    <span>Bytové domy</span><span>Průmyslové objekty</span><span>Rodinné domy</span><span>Občanská vybavenost</span><span>Zpevněné plochy</span><span>Historické budovy</span><span>Půjčovna nářadí</span><span>Kyjov</span><span>Jižní Morava</span>
+    <span>Bytové domy</span><span>Průmyslové objekty</span><span>Rodinné domy</span><span>Občanská vybavenost</span><span>Zpevněné plochy</span><span>Historické budovy</span><span>Půjčovna nářadí</span><span>Kyjov</span><span>Jižní Morava</span>
   </div>
 </div>
 
@@ -857,17 +756,17 @@ h1,h2,h3{text-wrap:balance}
 <section class="services section-pad" id="sluzby">
   <div class="wrap">
     <div class="section-head" data-num="01">
-      <span class="eyebrow">Co pro vás uděláme</span>
-      <h2>Kompletní stavební služby pod jednou střechou</h2>
-      <p class="lead">Od základů nového domu přes rekonstrukci až po zpevněné plochy okolo.
-         Postaráme se o celý proces — vy řešíte jen jednoho dodavatele.</p>
+      <span class="eyebrow">Co stavíme</span>
+      <h2>Od rodinného domu po průmyslový areál</h2>
+      <p class="lead">Kompletní stavební práce pod jednou střechou — pro soukromé investory, firmy
+         i veřejný sektor. Postaráme se o celý proces, vy řešíte jednoho dodavatele.</p>
     </div>
 
     <div class="svc-grid">
       <!-- 1 -->
       <div class="svc">
         <svg class="svc-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 22 24 8l18 14M10 20v20h28V20M20 40V28h8v12"/></svg>
-        <h3>Rodinné domy na klíč</h3>
+        <h3>Rodinné domy</h3>
         <p>Zděné domy i bungalovy postavené kompletně na klíč — od projektu a základů až po předání hotového domu.</p>
         <ul class="svc-list">
           <li>Základy, hrubá stavba i dokončení</li>
@@ -877,68 +776,67 @@ h1,h2,h3{text-wrap:balance}
       </div>
       <!-- 2 -->
       <div class="svc">
-        <svg class="svc-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M30 8l10 10-22 22H8v-10L30 8zM26 12l10 10"/></svg>
-        <h3>Rekonstrukce a opravy</h3>
-        <p>Kompletní rekonstrukce domů a bytů, půdní vestavby, výměny oken, zateplení fasád i střech. Staré proměníme v nové.</p>
+        <svg class="svc-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 42V12h28v30M10 42h28M17 20h4M27 20h4M17 28h4M27 28h4M17 36h4M27 36h4"/></svg>
+        <h3>Bytové domy</h3>
+        <p>Výstavba bytových domů od základové desky po předání bytů — novostavby i komplexní obnova bytového fondu.</p>
         <ul class="svc-list">
-          <li>Domy, byty i půdní vestavby</li>
-          <li>Zateplení fasád a střech, výměna oken</li>
-          <li>Dispoziční i celkové rekonstrukce</li>
+          <li>Novostavby bytových domů</li>
+          <li>Kompletní řízení výstavby</li>
+          <li>Spolupráce s investory a developery</li>
         </ul>
       </div>
       <!-- 3 -->
       <div class="svc">
-        <svg class="svc-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 30h36M6 38h36M12 30v-6h8v6M28 30v-6h8v6M16 24v-6h16v6"/></svg>
-        <h3>Zámková dlažba na klíč</h3>
-        <p>Vjezdy, chodníky a zpevněné plochy okolo domu — návrh, podklad i pokládka zámkové dlažby v jednom.</p>
+        <svg class="svc-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 42h40M6 42V24l7-5v5l7-5v5l7-5v18M34 42V14h6v28M12 30h3M19 30h3M26 30h3"/></svg>
+        <h3>Průmyslové objekty</h3>
+        <p>Haly, provozovny a zázemí pro výrobu i skladování. Stavby, které mají sloužit provozu — funkční, odolné, v termínu.</p>
         <ul class="svc-list">
-          <li>Vjezdy, chodníky, terasy</li>
-          <li>Příprava podkladu i obrubníky</li>
-          <li>Odvodnění zpevněných ploch</li>
+          <li>Výrobní a skladové haly</li>
+          <li>Administrativní zázemí provozů</li>
+          <li>Areálové komunikace a plochy</li>
         </ul>
       </div>
       <!-- 4 -->
       <div class="svc">
-        <svg class="svc-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M24 6v14M24 20c-8 0-14 6-14 14v8h28v-8c0-8-6-14-14-14zM16 34h16"/></svg>
-        <h3>Drenáže základů</h3>
-        <p>Odvedeme vodu od základů rodinných i bytových domů a ochráníme stavbu před vlhkostí a jejími následky.</p>
+        <svg class="svc-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 20 24 8l18 12M8 20v18M40 20v18M16 24v10M24 24v10M32 24v10M6 42h36M6 38h36"/></svg>
+        <h3>Občanská vybavenost</h3>
+        <p>Školy, školky, úřady a další veřejné stavby. Máme zkušenosti s veřejnými zakázkami — mezi naše investory patří i Město Kyjov.</p>
         <ul class="svc-list">
-          <li>Ochrana proti vzlínající vlhkosti</li>
-          <li>Rodinné i bytové domy</li>
-          <li>Řešení i u starších staveb</li>
+          <li>Školy, školky a veřejné budovy</li>
+          <li>Veřejné zakázky a výběrová řízení</li>
+          <li>Realizace za provozu instituce</li>
         </ul>
       </div>
       <!-- 5 -->
       <div class="svc">
-        <svg class="svc-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 40h32M12 40V22l12-8 12 8v18M20 40V30h8v10M6 22l18-12 18 12"/></svg>
-        <h3>Demolice a likvidace</h3>
-        <p>Bezpečné demolice objektů včetně odvozu a ekologické likvidace suti na skládce. Připravíme čistý pozemek.</p>
+        <svg class="svc-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 42V22a12 12 0 0 1 24 0v20M12 42h24M20 42V30a4 4 0 0 1 8 0v12M24 6v6M18 12h12"/></svg>
+        <h3>Historické budovy</h3>
+        <p>Citlivá obnova historických a památkově cenných staveb. Řemeslná práce, která respektuje původní ráz budovy.</p>
         <ul class="svc-list">
-          <li>Kompletní i částečné demolice</li>
-          <li>Odvoz a ekologická likvidace suti</li>
-          <li>Vyklizení a příprava pozemku</li>
+          <li>Obnova fasád, krovů a konstrukcí</li>
+          <li>Postupy respektující památkovou ochranu</li>
+          <li>Tradiční řemesla i moderní technologie</li>
         </ul>
       </div>
       <!-- 6 -->
       <div class="svc">
-        <svg class="svc-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 8v32M22 8v32M34 8v32M6 16h32M6 28h32"/></svg>
-        <h3>Pronájem lešení a bednění</h3>
-        <p>Potřebujete jen vybavení? Pronajmeme vám lešení a bednění pro vaši vlastní stavbu za férové ceny.</p>
+        <svg class="svc-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 30h36M6 38h36M12 30v-6h8v6M28 30v-6h8v6M16 24v-6h16v6"/></svg>
+        <h3>Zpevněné plochy</h3>
+        <p>Vjezdy, parkoviště, chodníky i plochy celých areálů — návrh, podklad a pokládka v jednom.</p>
         <ul class="svc-list">
-          <li>Fasádní lešení i bednění</li>
-          <li>Krátkodobě i na celou stavbu</li>
-          <li>Férové ceny, doprava po domluvě</li>
+          <li>Zámková dlažba a obrubníky</li>
+          <li>Parkoviště a areálové komunikace</li>
+          <li>Odvodnění zpevněných ploch</li>
         </ul>
-        <a href="/pujcovna.html" class="link-pujcovna">Přejít do půjčovny →</a>
       </div>
     </div>
 
     <div class="svc-note">
       <div class="t">
-        <strong>Pomůžeme vám i s dotacemi.</strong> Jsme zapsaní v seznamu odborných dodavatelů —
-        poradíme, jak čerpat dotace na úsporné a nízkoenergetické bydlení (program Nová zelená úsporám).
+        <strong>Provozujeme také půjčovnu nářadí a lešení.</strong> Techniku, se kterou sami stavíme,
+        půjčíme i vám — krátkodobě i na celou stavbu, za férové denní sazby.
       </div>
-      <a href="#dotace" class="btn btn-dark">Jak to funguje</a>
+      <a href="/pujcovna.html" class="btn btn-dark">Do půjčovny</a>
     </div>
   </div>
 </section>
@@ -949,23 +847,23 @@ h1,h2,h3{text-wrap:balance}
     <div class="section-head" data-num="02">
       <span class="eyebrow">Naše realizace</span>
       <h2>Práce, za kterou se nestydíme</h2>
-      <p class="lead">Vybrané dokončené stavby a rekonstrukce na Kyjovsku a v okolí.
-         Mezi našimi zákazníky je i Město Kyjov.</p>
+      <p class="lead">Vybrané dokončené stavby na Kyjovsku a v okolí.
+         Mezi našimi investory je i Město Kyjov.</p>
     </div>
 
     <!-- Vlajková reference: ZŠ Bohuslavice — s posuvníkem Před/Po -->
     <article class="ref-feature">
-      <div class="ba" data-ba tabindex="0" role="slider" aria-label="Porovnání stavu před a po rekonstrukci" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+      <div class="ba" data-ba tabindex="0" role="slider" aria-label="Porovnání stavu před a po stavebních úpravách" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
         <div class="ba-panel after">
           <div class="ba-inner">
             <div class="photo-slot"></div>
-            <img src="/img/ref-1.jpg" alt="Po rekonstrukci" onerror="this.remove()">
+            <img src="/img/ref-1.jpg" alt="Po stavebních úpravách" onerror="this.remove()">
           </div>
         </div>
         <div class="ba-panel before">
           <div class="ba-inner">
             <div class="photo-slot ps-aged"></div>
-            <img src="/img/ref-pred.jpg" alt="Před rekonstrukcí" onerror="this.remove()">
+            <img src="/img/ref-pred.jpg" alt="Před stavebními úpravami" onerror="this.remove()">
           </div>
         </div>
         <div class="ba-handle"></div>
@@ -995,114 +893,35 @@ h1,h2,h3{text-wrap:balance}
       <article class="ref-card">
         <div class="photo-slot"><img src="/img/ref-2.jpg" alt="Rekonstrukce rodinného domu" loading="lazy" onerror="this.remove()"></div>
         <div class="ref-card-body">
-          <h4>Rekonstrukce RD Kyjov — Klínky</h4>
-          <div class="rc-meta">Celková rekonstrukce interiéru, výměna oken a dveří, zateplení fasády a střechy.</div>
-          <span class="rc-tag">Rodinný dům · rekonstrukce</span>
+          <h4>RD Kyjov — Klínky</h4>
+          <div class="rc-meta">Celková modernizace interiéru, výměna oken a dveří, zateplení fasády a střechy.</div>
+          <span class="rc-tag">Rodinný dům</span>
         </div>
       </article>
       <article class="ref-card">
-        <div class="photo-slot"><img src="/img/ref-3.jpg" alt="Rodinný dům po rekonstrukci" loading="lazy" onerror="this.remove()"></div>
+        <div class="photo-slot"><img src="/img/ref-3.jpg" alt="Rodinný dům po modernizaci" loading="lazy" onerror="this.remove()"></div>
         <div class="ref-card-body">
           <h4>RD Kyjov-Hýsly — „Josefínský dvůr"</h4>
           <div class="rc-meta">Vnitřní stavební práce, zateplení obvodových stěn a úpravy zpevněných ploch.</div>
-          <span class="rc-tag">Rodinný dům · rekonstrukce</span>
+          <span class="rc-tag">Rodinný dům</span>
         </div>
       </article>
       <article class="ref-card">
         <div class="photo-slot"><img src="/img/ref-4.jpg" alt="Realizace SKELETA" loading="lazy" onerror="this.remove()"></div>
         <div class="ref-card-body">
           <h4>MŠ Kyjov, Nádražní</h4>
-          <div class="rc-meta">Kompletní interiérová rekonstrukce pavilonů „Motýlků" a „Logotřídy" včetně sociálního zázemí.</div>
-          <span class="rc-tag">Občanská stavba</span>
+          <div class="rc-meta">Kompletní interiérová obnova pavilonů „Motýlků" a „Logotřídy" včetně sociálního zázemí.</div>
+          <span class="rc-tag">Občanská vybavenost</span>
         </div>
       </article>
       <article class="ref-card">
         <div class="photo-slot"><img src="/img/ref-5.jpg" alt="Realizace SKELETA" loading="lazy" onerror="this.remove()"></div>
         <div class="ref-card-body">
           <h4>MŠ Bohuslavice u Kyjova</h4>
-          <div class="rc-meta">Rekonstrukce sociálního zázemí — WC a umývárny mateřské školy.</div>
-          <span class="rc-tag">Občanská stavba</span>
+          <div class="rc-meta">Obnova sociálního zázemí — WC a umývárny mateřské školy.</div>
+          <span class="rc-tag">Občanská vybavenost</span>
         </div>
       </article>
-    </div>
-  </div>
-</section>
-
-<!-- ============ KALKULAČKA / CENÍK ============ -->
-<section class="calc-sec section-pad" id="kalkulacka">
-  <div class="wrap">
-    <div class="section-head" data-num="03">
-      <span class="eyebrow">Orientační cena</span>
-      <h2>Spočítejte si odhad za pár vteřin</h2>
-      <p class="lead">Vyberte typ zakázky a plochu. Ukážeme vám orientační cenové rozpětí — a rovnou
-         si můžete namodelovat i přibližnou měsíční splátku hypotéky. Přesnou nabídku pak
-         zdarma spočítáme po zaměření na místě.</p>
-    </div>
-
-    <div class="calc-wrap">
-      <div class="calc-controls">
-        <div class="calc-field">
-          <div class="fl"><span>Typ zakázky</span></div>
-          <div class="seg" id="calcType">
-            <button type="button" data-type="dum" class="active">Rodinný dům</button>
-            <button type="button" data-type="rekonstrukce">Rekonstrukce</button>
-            <button type="button" data-type="dlazba">Zámková dlažba</button>
-          </div>
-        </div>
-
-        <div class="calc-field">
-          <div class="fl"><span id="areaLabel">Podlahová plocha</span><span class="val"><span id="areaVal">140</span> m²</span></div>
-          <input type="range" id="calcArea" min="60" max="300" step="5" value="140">
-        </div>
-
-        <div class="calc-field">
-          <div class="fl"><span>Úroveň provedení</span></div>
-          <div class="seg" id="calcStd">
-            <button type="button" data-std="1" class="active">Standard</button>
-            <button type="button" data-std="1.28">Nadstandard</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="calc-result">
-        <span class="cr-label">Orientační cena</span>
-        <div class="calc-price" id="calcPrice">4,2 – 5,9 mil. Kč</div>
-        <div class="calc-sub" id="calcUnit">cca 30 000 – 42 000 Kč / m² vč. DPH</div>
-        <a href="#kontakt" class="btn btn-primary">Chci přesnou nabídku zdarma</a>
-        <p class="calc-disclaimer">Jde o hrubý orientační odhad, ne cenovou nabídku. Skutečná cena
-          závisí na projektu, materiálech a stavu objektu. Přesnou nabídku vám zdarma spočítáme po zaměření na místě.</p>
-      </div>
-    </div>
-
-    <!-- Hypotéka — orientační měsíční splátka (napojeno na kalkulačku výše) -->
-    <div class="cm-head">
-      <span class="eyebrow">Financování</span>
-      <h3>Kolik by dělala měsíční splátka?</h3>
-    </div>
-    <div class="calc-wrap">
-      <div class="calc-controls">
-        <p class="cm-lead">Modelujeme z odhadu ceny stavby <b id="mBase">4,9 mil. Kč</b> z kalkulačky výše.</p>
-        <div class="calc-field">
-          <div class="fl"><span>Vlastní zdroje</span><span class="val" id="mDownVal">20 %</span></div>
-          <input type="range" id="mDown" min="0" max="60" step="5" value="20">
-        </div>
-        <div class="calc-field">
-          <div class="fl"><span>Úroková sazba p.a.</span><span class="val" id="mRateVal">4,9 %</span></div>
-          <input type="range" id="mRate" min="3" max="7" step="0.1" value="4.9">
-        </div>
-        <div class="calc-field">
-          <div class="fl"><span>Doba splácení</span><span class="val" id="mYearsVal">30 let</span></div>
-          <input type="range" id="mYears" min="5" max="30" step="1" value="30">
-        </div>
-      </div>
-      <div class="calc-result">
-        <span class="cr-label">Orientační měsíční splátka</span>
-        <div class="calc-price" id="mPayment">— Kč</div>
-        <div class="calc-sub" id="mMeta">—</div>
-        <a href="#kontakt" class="btn btn-primary">Probrat stavbu i financování</a>
-        <p class="calc-disclaimer">Modelová anuitní splátka, ne nabídka úvěru. Skutečné podmínky
-          (sazba, LTV, bonita) určuje banka — nejsme finanční poradci.</p>
-      </div>
     </div>
   </div>
 </section>
@@ -1110,7 +929,7 @@ h1,h2,h3{text-wrap:balance}
 <!-- ============ JAK PRACUJEME ============ -->
 <section class="process section-pad" id="postup">
   <div class="wrap">
-    <div class="section-head" data-num="04">
+    <div class="section-head" data-num="03">
       <span class="eyebrow">Jak to u nás probíhá</span>
       <h2>Od prvního telefonu k hotové stavbě</h2>
       <p class="lead">Jasný postup bez překvapení. Víte, co se děje v každé fázi.</p>
@@ -1125,42 +944,19 @@ h1,h2,h3{text-wrap:balance}
   </div>
 </section>
 
-<!-- ============ DOTACE ============ -->
-<section class="dotace-sec section-pad" id="dotace">
-  <div class="wrap">
-    <div class="dotace-band">
-      <div>
-        <span class="eyebrow">Nová zelená úsporám</span>
-        <h2>Získejte na rekonstrukci dotaci</h2>
-        <p class="lead">Jsme zapsaní v seznamu odborných dodavatelů. Poradíme, na jaký příspěvek
-           dosáhnete, a stavbu provedeme tak, aby na podmínky dotace opravdu splnila.</p>
-        <a href="#kontakt" class="btn btn-dark" style="margin-top:26px">Nezávazně se poradit</a>
-      </div>
-      <div>
-        <ul class="dotace-steps">
-          <li><span class="ds-n">1</span><span class="ds-t"><b>Zjistíme, na co máte nárok.</b> Zateplení, výměna oken, zdroje tepla, fotovoltaika, dešťovka…</span></li>
-          <li><span class="ds-n">2</span><span class="ds-t"><b>Navrhneme řešení</b> tak, aby splnilo technické podmínky programu.</span></li>
-          <li><span class="ds-n">3</span><span class="ds-t"><b>Zrealizujeme stavbu</b> a připravíme podklady, které k dotaci potřebujete.</span></li>
-        </ul>
-        <p class="calc-disclaimer" style="color:var(--faint);border-top:1px solid var(--line);padding-top:16px;margin-top:22px">
-          Konkrétní podmínky a výše příspěvku se řídí aktuální výzvou programu — ověříme je s vámi.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ============ O NÁS ============ -->
 <section class="about section-pad" id="o-nas">
   <div class="wrap">
     <div>
       <span class="eyebrow">O společnosti</span>
-      <h2>Místní firma, na kterou je spolehnutí</h2>
-      <p>Stavební společnost SKELETA s.r.o. působí na Kyjovsku od roku 2016.
-         Za tu dobu jsme postavili a zrekonstruovali desítky rodinných domů i veřejných staveb —
-         mezi našimi zákazníky je i Město Kyjov.</p>
-      <p>Nejsme anonymní korporace. Jsme parta lidí z jižní Moravy, která staví tak,
-         jako by stavěla pro sebe. Držíme slovo, termíny i rozpočet — a to je i důvod,
-         proč nás hodnotí jako finančně stabilní a spolehlivou firmu.</p>
+      <h2>Spolehlivý stavební partner na jižní Moravě</h2>
+      <p>Stavební společnost SKELETA s.r.o. působí na Kyjovsku od roku 2016. Za tu dobu máme
+         za sebou desítky dokončených staveb — od rodinných a bytových domů po průmyslové objekty
+         a stavby občanské vybavenosti. Mezi naše investory patří města i obce regionu, včetně
+         Města Kyjov.</p>
+      <p>Stavíme s vlastním týmem a prověřenými řemeslníky, s důrazem na kvalitu odvedené práce
+         a dodržení termínu i rozpočtu. Zakládáme si na transparentní komunikaci a finanční
+         stabilitě — proto nás soukromí zákazníci i veřejní zadavatelé vnímají jako spolehlivého dodavatele.</p>
       <p style="color:#fff;font-weight:600;margin-bottom:8px">— Roman Čech, zakladatel a jednatel</p>
       <a href="#kontakt" class="btn btn-primary" style="margin-top:12px">Domluvit schůzku</a>
     </div>
@@ -1171,7 +967,6 @@ h1,h2,h3{text-wrap:balance}
         <div class="about-stat"><div class="n">Desítky</div><div class="l">dokončených realizací</div></div>
         <div class="about-stat"><div class="n">0×</div><div class="l">insolvence — čistá historie</div></div>
       </div>
-      <div class="about-photo"><div class="photo-slot ps-dark"><div class="ps-label"><b>Foto týmu</b>sem přijde společná fotka party</div></div></div>
     </div>
   </div>
 </section>
@@ -1179,7 +974,7 @@ h1,h2,h3{text-wrap:balance}
 <!-- ============ RECENZE ============ -->
 <section class="reviews section-pad" id="recenze">
   <div class="wrap">
-    <div class="section-head" data-num="05">
+    <div class="section-head" data-num="04">
       <span class="eyebrow">Co říkají zákazníci</span>
       <h2>Spokojenost, na které stavíme</h2>
       <span class="placeholder-note">Ukázkový obsah — doplníme reálné recenze vašich zákazníků</span>
@@ -1193,7 +988,7 @@ h1,h2,h3{text-wrap:balance}
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.9 7.5.6-5.7 4.9 1.8 7.3L12 17.8 5.1 21.7l1.8-7.3L1.2 9.5 8.7 8.9z"/></svg>
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.9 7.5.6-5.7 4.9 1.8 7.3L12 17.8 5.1 21.7l1.8-7.3L1.2 9.5 8.7 8.9z"/></svg>
         </div>
-        <p>„Rekonstrukci našeho domu zvládli přesně v termínu a bez zbytečných řečí.
+        <p>„Stavbu našeho domu zvládli přesně v termínu a bez zbytečných řečí.
            Vše proběhlo v klidu a výsledek předčil naše očekávání."</p>
         <div class="rev-who"><span class="rev-ava">JN</span><div><b>Jméno zákazníka</b><span>Rodinný dům, Kyjov</span></div></div>
       </div>
@@ -1207,7 +1002,7 @@ h1,h2,h3{text-wrap:balance}
         </div>
         <p>„Oceňuji férový přístup a jasnou cenu předem. Domluva byla snadná
            a řemeslníci po sobě vždy uklidili. Doporučuji."</p>
-        <div class="rev-who"><span class="rev-ava">PS</span><div><b>Jméno zákazníka</b><span>Rekonstrukce, okres Hodonín</span></div></div>
+        <div class="rev-who"><span class="rev-ava">PS</span><div><b>Jméno zákazníka</b><span>Zpevněné plochy, okres Hodonín</span></div></div>
       </div>
       <div class="rev">
         <div class="rev-stars" aria-label="5 z 5">
@@ -1225,81 +1020,51 @@ h1,h2,h3{text-wrap:balance}
   </div>
 </section>
 
-<!-- ============ FAQ ============ -->
-<section class="faq-sec section-pad" id="faq">
+<!-- ============ PŘIPRAVUJEME (nové projekty) ============ -->
+<section class="upcoming section-pad" id="pripravujeme">
   <div class="wrap">
-    <div class="section-head" style="margin:0 auto 48px;text-align:center">
-      <span class="eyebrow">Časté dotazy</span>
-      <h2>Na co se nás nejčastěji ptáte</h2>
+    <div class="section-head">
+      <span class="eyebrow">Připravujeme</span>
+      <h2>Na čem právě pracujeme</h2>
+      <p class="lead">Rozestavěné a připravované projekty, které brzy doplníme mezi reference.
+         Vracejte se sem — postupně tu přibývají nové a zajímavé stavby.</p>
+      <span class="placeholder-note">Ukázkový obsah — brzy zde přibudou konkrétní projekty</span>
     </div>
-    <div class="faq-list">
-      <div class="faq-item">
-        <button class="faq-q">Kolik bude stavba nebo rekonstrukce stát?
-          <svg class="faq-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
-        <div class="faq-a"><p>Orientační rozpětí si můžete spočítat v naší <a href="#kalkulacka" style="color:var(--ink);text-decoration:underline">kalkulačce</a>.
-          Přesnou cenu ale zodpovědně dáme až po bezplatném zaměření na místě — každá stavba je jiná.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">Jak dlouho realizace trvá?
-          <svg class="faq-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
-        <div class="faq-a"><p>Záleží na rozsahu — od několika dní u dlažby po měsíce u domu na klíč.
-          Konkrétní termín vždy uvádíme ve smlouvě o dílo a držíme ho.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">Kam dojedete? Jakou oblast pokrýváte?
-          <svg class="faq-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
-        <div class="faq-a"><p>Primárně působíme na Kyjovsku a v okrese Hodonín. Po domluvě realizujeme zakázky
-          v rámci celé jižní Moravy.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">Pomůžete mi i s dotací?
-          <svg class="faq-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
-        <div class="faq-a"><p>Ano. Jsme zapsaní v seznamu odborných dodavatelů a poradíme vám s programem
-          Nová zelená úsporám — od výběru vhodných opatření po podklady k žádosti.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">Dáváte na práci záruku?
-          <svg class="faq-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
-        <div class="faq-a"><p>Ano, na dílo poskytujeme záruku a jsme k dispozici i po předání.
-          Za svojí prací si stojíme — proto s námi zákazníci řeší i další zakázky.</p></div>
-      </div>
-      <div class="faq-item">
-        <button class="faq-q">Jak začneme spolupráci?
-          <svg class="faq-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg></button>
-        <div class="faq-a"><p>Stačí zavolat nebo vyplnit <a href="#kontakt" style="color:var(--ink);text-decoration:underline">nezávaznou poptávku</a>.
-          Ozveme se, domluvíme zaměření a připravíme nabídku — vše zdarma a bez závazku.</p></div>
-      </div>
+    <div class="upcoming-grid">
+      <article class="up-card">
+        <div class="up-photo">
+          <div class="photo-slot ps-dark"><div class="ps-label"><b>Nový projekt</b>vizualizace / foto brzy</div></div>
+          <span class="up-badge">Připravujeme</span>
+        </div>
+        <div class="up-body">
+          <h3>Připravovaný projekt</h3>
+          <p>Krátký popis stavby doplníme, jakmile projekt spustíme.</p>
+          <span class="up-cat">Kategorie · lokalita</span>
+        </div>
+      </article>
+      <article class="up-card">
+        <div class="up-photo">
+          <div class="photo-slot ps-dark"><div class="ps-label"><b>Nový projekt</b>vizualizace / foto brzy</div></div>
+          <span class="up-badge">Připravujeme</span>
+        </div>
+        <div class="up-body">
+          <h3>Připravovaný projekt</h3>
+          <p>Krátký popis stavby doplníme, jakmile projekt spustíme.</p>
+          <span class="up-cat">Kategorie · lokalita</span>
+        </div>
+      </article>
+      <article class="up-card">
+        <div class="up-photo">
+          <div class="photo-slot ps-dark"><div class="ps-label"><b>Nový projekt</b>vizualizace / foto brzy</div></div>
+          <span class="up-badge">Připravujeme</span>
+        </div>
+        <div class="up-body">
+          <h3>Připravovaný projekt</h3>
+          <p>Krátký popis stavby doplníme, jakmile projekt spustíme.</p>
+          <span class="up-cat">Kategorie · lokalita</span>
+        </div>
+      </article>
     </div>
-  </div>
-</section>
-
-<!-- ============ CROSS-SELL → VESTARA (hotové domy) ============ -->
-<section class="crosssell section-pad">
-  <div class="wrap">
-    <div>
-      <span class="eyebrow">Nechcete řešit stavbu?</span>
-      <h2>Máme i hotové domy, do kterých se stačí nastěhovat</h2>
-      <p>Nemáte čas ani chuť řešit celou stavbu od základů? Naše sesterská developerská
-         společnost <strong>VESTARA</strong> nabízí nové domy na klíč připravené k okamžitému
-         bydlení — postavené se stejnou péčí jako všechno, co stavíme.</p>
-      <a href="https://blacktalon.cz/vestara/" class="btn btn-primary btn-lg btn-arr">Prohlédnout hotové domy</a>
-    </div>
-    <a href="https://blacktalon.cz/vestara/" class="xs-card" style="display:block">
-      <div class="xs-brand">
-        <svg width="40" height="40" viewBox="0 0 64 64" fill="none" style="color:#fff" aria-hidden="true">
-          <path d="M32 8c6 9 2 15 0 19-2-4-6-8-2-14 0 5 3 5 2-5z" fill="#c2a052"/>
-          <path d="M8 46 32 28 56 46" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/>
-          <path d="M15 46 32 33 49 46" fill="none" stroke="currentColor" stroke-width="2" opacity=".6"/>
-          <rect x="28.5" y="40" width="7" height="8" fill="currentColor"/>
-        </svg>
-        <span class="xn">VESTARA<small>Solution s.r.o.</small></span>
-      </div>
-      <div class="xs-prop">
-        <div class="xp-photo"><div class="photo-slot"></div><img src="https://blacktalon.cz/vestara/img/vracov-hero.webp" alt="" onerror="this.remove()"></div>
-        <div class="xp-info"><b>Rodinný dům Vracov</b><span>4+kk · novostavba 2025 · k nastěhování</span></div>
-        <span class="xp-price">10,4 mil.</span>
-      </div>
-    </a>
   </div>
 </section>
 
@@ -1355,12 +1120,13 @@ h1,h2,h3{text-wrap:balance}
       <div class="field">
         <label for="typ">O co máte zájem</label>
         <select id="typ" name="typ">
-          <option>Rodinný dům na klíč</option>
-          <option>Rekonstrukce / oprava</option>
-          <option>Zámková dlažba</option>
-          <option>Drenáže základů</option>
-          <option>Demolice</option>
-          <option>Pronájem lešení / bednění</option>
+          <option>Bytový dům</option>
+          <option>Průmyslový objekt</option>
+          <option>Rodinný dům</option>
+          <option>Občanská vybavenost</option>
+          <option>Zpevněné plochy</option>
+          <option>Historická budova</option>
+          <option>Půjčovna nářadí</option>
           <option>Něco jiného</option>
         </select>
       </div>
@@ -1418,18 +1184,14 @@ h1,h2,h3{text-wrap:balance}
         </svg>
         <span class="brand-name">SKELETA<small style="color:#8a8f97">Stavební společnost s.r.o.</small></span>
       </div>
-      <p class="footer-about">Rodinné domy na klíč a kompletní rekonstrukce na Kyjovsku a jižní Moravě. Od roku 2016.</p>
-      <a href="https://blacktalon.cz/vestara/" style="display:inline-flex;align-items:center;gap:8px;margin-top:18px;color:var(--accent-on-dark);font-weight:600;font-size:.9rem">Developerský partner: VESTARA Solution →</a>
+      <p class="footer-about">Bytové a rodinné domy, průmyslové objekty i občanská vybavenost na Kyjovsku a jižní Moravě. Od roku 2016.</p>
     </div>
     <div>
       <h5>Navigace</h5>
       <a href="#sluzby">Služby</a>
       <a href="#reference">Reference</a>
-      <a href="#kalkulacka">Orientační cena</a>
       <a href="/pujcovna.html">Půjčovna nářadí</a>
-      <a href="#dotace">Dotace</a>
       <a href="#o-nas">O nás</a>
-      <a href="#faq">Časté dotazy</a>
       <a href="#kontakt">Kontakt</a>
     </div>
     <div>
@@ -1533,33 +1295,11 @@ const FORM_ENDPOINT='https://formsubmit.co/ajax/info@skeleta.cz';
 // Jemný reveal-on-scroll (respektuje prefers-reduced-motion)
 (()=>{
   if(window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window))return;
-  const sel='.section-head,.svc,.ref-card,.ref-feature,.rev,.faq-item,.step,.calc-wrap,.dotace-band,.person,.trust-item';
+  const sel='.section-head,.svc,.ref-card,.ref-feature,.rev,.step,.person,.trust-item,.up-card';
   document.querySelectorAll(sel).forEach((el,i)=>{el.classList.add('reveal');el.style.transitionDelay=((i%6)*40)+'ms';});
   const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}}),{threshold:.12,rootMargin:'0px 0px -40px 0px'});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 })();
-
-// ===== FAQ akordeon =====
-document.querySelectorAll('.faq-item').forEach((item,i)=>{
-  const q=item.querySelector('.faq-q');
-  const a=item.querySelector('.faq-a');
-  a.id=a.id||('faq-a-'+i);
-  q.setAttribute('aria-expanded','false');
-  q.setAttribute('aria-controls',a.id);
-  q.addEventListener('click',()=>{
-    const open=item.classList.toggle('open');
-    q.setAttribute('aria-expanded',open?'true':'false');
-    if(open){a.style.maxHeight=a.scrollHeight+'px';}
-    else{
-      if(a.style.maxHeight==='none'){a.style.maxHeight=a.scrollHeight+'px';void a.offsetHeight;}
-      a.style.maxHeight='';
-    }
-  });
-  // po otevření uvolnit pevnou výšku (rotace mobilu / resize obsah neořízne)
-  a.addEventListener('transitionend',e=>{
-    if(e.propertyName==='max-height'&&item.classList.contains('open'))a.style.maxHeight='none';
-  });
-});
 
 // ===== Před / Po posuvník =====
 document.querySelectorAll('[data-ba]').forEach(ba=>{
@@ -1608,81 +1348,6 @@ document.querySelectorAll('[data-ba]').forEach(ba=>{
   window.addEventListener('touchend',end);
 });
 
-// ===== Kalkulačka orientační ceny =====
-(()=>{
-  // Sazby jsou ORIENTAČNÍ placeholdery — doladit dle reálného ceníku firmy.
-  const RATES={
-    dum:         {min:28000,max:42000,area:{min:60,max:300,step:5,def:140},label:'Podlahová plocha',unit:'Kč/m²'},
-    rekonstrukce:{min:9000, max:22000,area:{min:20,max:250,step:5,def:90}, label:'Rekonstruovaná plocha',unit:'Kč/m²'},
-    dlazba:      {min:1300, max:2400, area:{min:10,max:400,step:5,def:80}, label:'Plocha dlažby',unit:'Kč/m²'}
-  };
-  const typeBox=document.getElementById('calcType');
-  const stdBox=document.getElementById('calcStd');
-  const area=document.getElementById('calcArea');
-  const areaVal=document.getElementById('areaVal');
-  const areaLabel=document.getElementById('areaLabel');
-  const priceEl=document.getElementById('calcPrice');
-  const unitEl=document.getElementById('calcUnit');
-  if(!typeBox) return;
-  let type='dum', std=1;
-  const nf=new Intl.NumberFormat('cs-CZ');
-  const fmt=v=>{
-    if(v>=1e6) return (v/1e6).toLocaleString('cs-CZ',{minimumFractionDigits:1,maximumFractionDigits:1})+' mil. Kč';
-    return nf.format(Math.round(v/1000)*1000)+' Kč';
-  };
-  // Hypotéka
-  const mDown=document.getElementById('mDown');
-  const mRate=document.getElementById('mRate');
-  const mYears=document.getElementById('mYears');
-  const mDownVal=document.getElementById('mDownVal');
-  const mRateVal=document.getElementById('mRateVal');
-  const mYearsVal=document.getElementById('mYearsVal');
-  const mBase=document.getElementById('mBase');
-  const mPayment=document.getElementById('mPayment');
-  const mMeta=document.getElementById('mMeta');
-  let estimate=0; // střed odhadu ceny stavby
-  const mortgage=()=>{
-    const downPct=+mDown.value, rate=+mRate.value, yrs=+mYears.value;
-    const down=estimate*downPct/100;
-    const loan=Math.max(0,estimate-down);
-    const r=rate/100/12, n=yrs*12;
-    const pay=r>0 ? loan*r/(1-Math.pow(1+r,-n)) : loan/n;
-    mBase.textContent=fmt(estimate);
-    mDownVal.textContent=downPct+' % · '+nf.format(Math.round(down/1000)*1000)+' Kč';
-    mRateVal.textContent=rate.toFixed(1).replace('.',',')+' %';
-    mYearsVal.textContent=yrs+' let';
-    mPayment.textContent=nf.format(Math.round(pay/100)*100)+' Kč / měs.';
-    mMeta.textContent='Výše úvěru '+fmt(loan)+' · '+yrs+' let · '+rate.toFixed(1).replace('.',',')+' % p.a.';
-  };
-  const calc=()=>{
-    const r=RATES[type];
-    const a=+area.value;
-    const lo=a*r.min*std, hi=a*r.max*std;
-    priceEl.textContent=fmt(lo)+' – '+fmt(hi);
-    unitEl.textContent='cca '+nf.format(Math.round(r.min*std))+' – '+nf.format(Math.round(r.max*std))+' '+r.unit+' vč. DPH';
-    areaVal.textContent=a;
-    estimate=(lo+hi)/2;
-    mortgage();
-  };
-  [mDown,mRate,mYears].forEach(el=>el.addEventListener('input',mortgage));
-  typeBox.addEventListener('click',e=>{
-    const b=e.target.closest('button'); if(!b)return;
-    type=b.dataset.type;
-    typeBox.querySelectorAll('button').forEach(x=>x.classList.toggle('active',x===b));
-    const ar=RATES[type].area;
-    area.min=ar.min;area.max=ar.max;area.step=ar.step;area.value=ar.def;
-    areaLabel.textContent=RATES[type].label;
-    calc();
-  });
-  stdBox.addEventListener('click',e=>{
-    const b=e.target.closest('button'); if(!b)return;
-    std=+b.dataset.std;
-    stdBox.querySelectorAll('button').forEach(x=>x.classList.toggle('active',x===b));
-    calc();
-  });
-  area.addEventListener('input',calc);
-  calc();
-})();
 </script>
 </body>
 </html>

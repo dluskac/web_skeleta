@@ -2,7 +2,7 @@
 
 Statický web **Stavební společnosti SKELETA s.r.o.** (Kyjov) pro doménu **skeleta.cz**.
 
-- `index.html` — hlavní one-page (služby, reference, kalkulačka, dotace, FAQ, kontakt)
+- `index.html` — hlavní one-page (služby, reference, postup, o nás, kontakt)
 - `pujcovna.html` — Půjčovna nářadí a lešení
 - `img/` — obrázky (logo, hero, reference)
 - `robots.txt`, `sitemap.xml` — SEO
