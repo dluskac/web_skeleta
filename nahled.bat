@@ -1,10 +1,18 @@
 @echo off
 rem =============================================================
 rem  Nahled webu SKELETA
-rem  Dvojklik spusti lokalni server a otevre web v prohlizeci.
+rem  Dvojklik: stahne aktualni verzi z GitHubu, spusti lokalni
+rem  server a otevre web v prohlizeci.
 rem  Cerne okno nechte bezet; jeho zavrenim se nahled vypne.
 rem =============================================================
 cd /d "%~dp0"
+
+rem Stahni nejnovejsi verzi z GitHubu (kdyz je k dispozici git a internet)
+where git >nul 2>nul
+if not errorlevel 1 (
+  echo Stahuji aktualni verzi z GitHubu...
+  git pull --ff-only 2>nul
+)
 
 rem Kdyz uz server bezi, jen otevri prohlizec a skonci
 netstat -ano | findstr /c:":8765 " | findstr /c:"LISTENING" >nul 2>nul
