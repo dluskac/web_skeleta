@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Půjčovna nářadí a lešení — SKELETA | Kyjov</title>
+<meta name="description" content="Půjčovna stavebního nářadí, lešení a bednění v Kyjově. Míchačky, vibrační desky, bourací kladiva a další — férové ceny, krátkodobě i na celou stavbu.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://skeleta.cz/pujcovna.html">
+<meta name="theme-color" content="#17130f">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect x='4' y='4' width='32' height='32' fill='none' stroke='%23732559' stroke-width='3'/%3E%3Cpath d='M4 20h32M20 4v32M4 4l32 32M36 4L4 36' stroke='%231b1714' stroke-width='2' fill='none'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#faf8f5;--surface-alt:#f1ece4;--ink:#1b1714;--body:#413a32;--muted:#6a6259;--faint:#786f65;
+  --line:#e9e2d7;--line-strong:#d7cdc0;
+  --accent:#732559;--accent-hover:#5c1d47;--accent-tint:#f5e9f0;--accent-on-dark:#cf9dbe;
+  --radius:8px;--radius-sm:6px;
+  --shadow:0 1px 2px rgba(27,23,20,.05),0 12px 34px rgba(27,23,20,.07);
+  --ease:.33s cubic-bezier(.2,.6,.2,1);--maxw:1240px;
+  --display:'Space Grotesk','Inter',sans-serif;--sans:'Inter',-apple-system,Arial,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--body);background:var(--bg);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer}
+h1,h2,h3{font-family:var(--display);color:var(--ink);font-weight:600;line-height:1.1;letter-spacing:-.01em;text-wrap:balance}
+section{scroll-margin-top:90px}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+.eyebrow{font-size:.8rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;display:block}
+::selection{background:var(--accent);color:#fff}
+html{scrollbar-color:var(--accent) var(--surface-alt)}
+::-webkit-scrollbar{width:11px}::-webkit-scrollbar-track{background:var(--surface-alt)}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:6px;border:3px solid var(--surface-alt)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 28px;
+  border-radius:var(--radius);font-size:.95rem;font-weight:600;border:1px solid transparent;
+  transition:background-color var(--ease),color var(--ease),transform .18s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:var(--accent);color:#fff}.btn-primary:hover{background:var(--accent-hover)}
+.btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.38)}
+.btn-ghost:hover{background:rgba(255,255,255,.10);border-color:#fff}
+.btn[disabled]{opacity:.55;cursor:wait}
+.btn-arr::after{content:"→";display:inline-block;margin-left:4px;transition:transform .18s ease}
+.btn-arr:hover::after{transform:translateX(4px)}
+
+/* Header */
+.header{position:fixed;top:0;left:0;right:0;z-index:100;transition:background-color var(--ease),border-color var(--ease);border-bottom:1px solid transparent}
+.header.scrolled{background:rgba(250,248,245,.88);backdrop-filter:blur(14px);border-bottom-color:var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+.brand{display:flex;align-items:center;padding:7px 13px;border-radius:var(--radius-sm);background:rgba(255,255,255,.93);box-shadow:0 3px 14px rgba(0,0,0,.1);transition:background var(--ease),box-shadow var(--ease)}
+.header.scrolled .brand{background:transparent;box-shadow:none;padding:6px 0}
+.brand img{height:32px;width:auto}
+.nav-links{display:flex;align-items:center;gap:4px}
+.nav-links a{padding:8px 14px;font-size:.9rem;font-weight:500;border-radius:var(--radius-sm);transition:color var(--ease),background var(--ease)}
+.header .nav-links a{color:rgba(255,255,255,.85)}
+.header .nav-links a:hover{background:rgba(255,255,255,.14)}
+.header.scrolled .nav-links a{color:var(--ink)}
+.header.scrolled .nav-links a:hover{background:var(--surface-alt)}
+.header .nav-links a.cta{background:#fff;color:var(--ink);font-weight:600;margin-left:10px}
+.header.scrolled .nav-links a.cta{background:var(--ink);color:#fff}
+
+/* Hero (kompaktní) */
+.hero{position:relative;min-height:76vh;display:flex;align-items:center;padding:150px 0 120px;background:var(--ink);overflow:hidden}
+.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;
+  animation:kenburns 26s ease-in-out infinite alternate}
+@keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.07)}}
+.hero::before{content:"";position:absolute;inset:0;z-index:1;
+  background:
+    linear-gradient(to top,var(--bg) 0%,rgba(250,248,245,0) 12%),
+    linear-gradient(rgba(115,37,89,.16),rgba(115,37,89,.16)),
+    linear-gradient(90deg,rgba(23,19,15,.9) 0%,rgba(23,19,15,.62) 52%,rgba(23,19,15,.3) 100%),
+    radial-gradient(720px 420px at 82% 30%,rgba(115,37,89,.35),transparent 70%)}
+.hero::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.08;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E")}
+.hero .wrap{position:relative;z-index:2;width:100%}
+.hero .eyebrow{color:var(--accent-on-dark)}
+.hero h1{color:#fff;font-size:clamp(2.3rem,5vw,3.8rem);font-weight:700;letter-spacing:-.02em;margin-bottom:20px;max-width:16ch}
+.hero p{color:#c9c2b8;font-size:1.14rem;max-width:52ch;margin-bottom:32px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.hero-note{display:block;margin-top:20px;font-size:.85rem;color:#a99e8f}
+
+/* Nářadí */
+.section-pad{padding:110px 0}
+.section-head{max-width:640px;margin-bottom:56px;position:relative}
+.section-head>*{position:relative}
+.section-head[data-num]::before{content:attr(data-num);position:absolute;top:-.48em;left:-.04em;
+  font-family:var(--display);font-weight:700;font-size:clamp(4.5rem,11vw,8rem);line-height:1;
+  color:var(--ink);opacity:.055;pointer-events:none;white-space:nowrap}
+
+/* Scroll progress */
+.scroll-progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--accent);z-index:300;pointer-events:none}
+
+/* Reveal-on-scroll */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+.section-head h2{font-size:clamp(1.9rem,3.4vw,2.7rem);margin-bottom:16px}
+.lead{font-size:1.1rem;color:var(--muted);text-wrap:pretty}
+.tools{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+.tool{background:var(--bg);padding:32px 28px;display:flex;flex-direction:column;transition:background var(--ease),transform var(--ease),box-shadow var(--ease)}
+.tool:hover{background:var(--surface-alt);transform:translateY(-4px);box-shadow:var(--shadow)}
+.tool-ico{width:52px;height:52px;padding:12px;background:var(--accent-tint);border-radius:var(--radius);color:var(--accent);margin-bottom:18px;transition:background var(--ease),color var(--ease)}
+.tool:hover .tool-ico{background:var(--accent);color:#fff}
+.tool h3{font-size:1.06rem;margin-bottom:8px}
+.tool p{font-size:.88rem;color:var(--muted);flex:1}
+.tool-price{margin-top:18px;padding-top:14px;border-top:1px solid var(--line);
+  font-family:var(--display);font-weight:700;color:var(--accent);font-size:1.02rem;font-variant-numeric:tabular-nums}
+.tool-price small{display:block;font-family:var(--sans);font-weight:400;color:var(--faint);font-size:.74rem;margin-top:2px}
+.tools-note{margin-top:26px;font-size:.85rem;color:var(--muted)}
+
+/* Proč od nás — tmavý band se zrnem (stejná kino-vrstva jako hlavní stránka) */
+.why{background:var(--ink);color:#c9c2b8;position:relative;overflow:hidden}
+.why::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.6;
+  background:radial-gradient(680px 380px at 78% 16%,rgba(115,37,89,.42),transparent 70%)}
+.why::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E")}
+.why .wrap{position:relative;z-index:1}
+.why .eyebrow{color:var(--accent-on-dark)}
+.why h2{color:#fff}
+.why .lead{color:#c9c2b8}
+.why .section-head[data-num]::before{color:#fff;opacity:.05}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:34px}
+.why-item{position:relative}
+.why-ico{width:48px;height:48px;padding:11px;border-radius:var(--radius);
+  background:rgba(207,157,190,.14);color:var(--accent-on-dark);margin-bottom:16px}
+.why-item h3{color:#fff;font-size:1.12rem;margin-bottom:8px}
+.why-item p{color:#a99e8f;font-size:.92rem}
+
+/* Podmínky */
+.terms{background:var(--surface-alt)}
+.terms-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+.term{padding-top:24px;border-top:2px solid var(--accent)}
+.term-num{display:block;font-family:var(--display);font-weight:700;font-size:1.05rem;letter-spacing:.1em;color:var(--accent);margin-bottom:10px}
+.term h3{font-size:1.08rem;margin-bottom:8px}
+.term p{font-size:.9rem;color:var(--muted)}
+
+/* Formulář */
+.form-wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px}
+.form{background:var(--surface-alt);border:1px solid var(--line);border-radius:var(--radius);padding:40px;box-shadow:var(--shadow)}
+.form h3{font-size:1.3rem;margin-bottom:6px}
+.form .fsub{font-size:.9rem;color:var(--muted);margin-bottom:24px}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:.82rem;font-weight:600;color:var(--ink);margin-bottom:6px}
+.field input,.field select,.field textarea{width:100%;padding:13px 15px;border:1px solid var(--line-strong);border-radius:var(--radius);
+  font-family:inherit;font-size:.95rem;color:var(--ink);background:var(--bg);transition:border-color var(--ease),box-shadow var(--ease)}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-tint)}
+.field textarea{resize:vertical;min-height:100px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:.8rem;color:var(--muted);margin:4px 0 12px}
+.consent input{width:auto;margin-top:2px;accent-color:var(--accent);flex:none}
+.form .btn{width:100%}
+.form-note{font-size:.78rem;color:var(--muted);margin-top:12px;text-align:center}
+.form.sent > *:not(.form-success){display:none}
+.form-success{display:none;text-align:center;padding:24px 0}
+.form.sent .form-success{display:block}
+.fs-ico{width:56px;height:56px;border-radius:50%;background:var(--accent-tint);color:var(--accent);display:grid;place-items:center;margin:0 auto 16px}
+.c-side h2{font-size:clamp(1.8rem,3vw,2.5rem);margin-bottom:16px}
+.c-side .tel{display:inline-flex;align-items:center;gap:10px;margin-top:22px;font-family:var(--display);font-weight:700;font-size:1.3rem;color:var(--ink)}
+.c-side .tel svg{color:var(--accent)}
+.c-side .hours{margin-top:10px;font-size:.9rem;color:var(--muted)}
+details.gdpr{margin-top:18px;font-size:.8rem;color:var(--muted)}
+details.gdpr summary{cursor:pointer;color:var(--ink);font-weight:600}
+details.gdpr p{margin-top:8px}
+
+/* Footer */
+.footer{background:#17130f;color:#a79e92;padding:48px 0 36px;position:relative;overflow:hidden}
+.footer::after{content:"PŮJČOVNA";position:absolute;right:-.04em;bottom:-.26em;pointer-events:none;
+  font-family:var(--display);font-weight:700;font-size:clamp(5rem,15vw,10rem);line-height:1;color:#fff;opacity:.04}
+.footer .wrap{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px}
+.footer a{color:var(--accent-on-dark);font-weight:600}
+.footer a:hover{text-decoration:underline}
+.footer small{font-size:.8rem}
+
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn:hover,.tool:hover{transform:none}.btn-arr::after{transition:none}
+  .hero-img{animation:none}.reveal{opacity:1!important;transform:none!important;transition:none}}
+@media(max-width:960px){
+  .tools{grid-template-columns:repeat(2,1fr)}
+  .terms-grid{grid-template-columns:1fr 1fr}
+  .form-wrap{grid-template-columns:1fr;gap:36px}
+  .section-pad{padding:80px 0}
+}
+@media(max-width:860px){.why-grid{grid-template-columns:1fr;gap:26px}}
+@media(max-width:640px){
+  .tools{grid-template-columns:1fr}
+  .terms-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .nav-links a:not(.cta){display:none}
+  .hero{padding:150px 0 80px}
+  .hero-note{display:block;margin:14px 0 0}
+}
+</style>
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+<header class="header" id="header">
+  <div class="wrap nav">
+    <a href="/" class="brand" aria-label="SKELETA — zpět na hlavní stránku">
+      <img src="/img/logo.png" alt="SKELETA — Stavební společnost">
+    </a>
+    <nav class="nav-links">
+      <a href="/">← Zpět na SKELETA</a>
+      <a href="#naradi">Nářadí</a>
+      <a href="#podminky">Podmínky</a>
+      <a href="tel:+420725051860">725 051 860</a>
+      <a href="#poptavka" class="cta">Rezervovat nářadí</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <img class="hero-img" src="/img/pujcovna-hero.jpg" alt="" onerror="this.remove()">
+  <div class="wrap">
+    <span class="eyebrow">SKELETA · Kyjov</span>
+    <h1>Půjčovna nářadí a lešení</h1>
+    <p>Stavební technika, se kterou sami stavíme — půjčíme vám ji za férové ceny.
+       Krátkodobě i na celou stavbu, s dopravou po domluvě.</p>
+    <div class="hero-actions">
+      <a href="#poptavka" class="btn btn-primary btn-arr">Rezervovat nářadí</a>
+      <a href="tel:+420725051860" class="btn btn-ghost">Zavolat</a>
+    </div>
+    <span class="hero-note">Po–Pá 8:00–16:00 · Nádražní 611/17, Kyjov</span>
+  </div>
+</section>
+
+<section class="section-pad" id="naradi">
+  <div class="wrap">
+    <div class="section-head" data-num="01">
+      <span class="eyebrow">Co půjčujeme</span>
+      <h2>Přehled nářadí a techniky</h2>
+      <p class="lead">Udržované stroje připravené k okamžitému nasazení. Ceny jsou orientační — přesnou nabídku a dostupnost potvrdíme telefonicky.</p>
+    </div>
+
+    <div class="tools">
+      <div class="tool">
+        <svg class="tool-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 6v36M22 6v36M34 6v36M6 14h32M6 26h32M6 38h32"/></svg>
+        <h3>Fasádní lešení</h3>
+        <p>Rámové lešení včetně podlážek a zábradlí. Montáž zajistíme.</p>
+        <div class="tool-price">od 8 Kč / m² / den<small>kauce dle rozsahu</small></div>
+      </div>
+      <div class="tool">
+        <svg class="tool-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><rect x="8" y="10" width="32" height="28" rx="2"/><path d="M8 20h32M16 10v28M32 10v28"/></svg>
+        <h3>Systémové bednění</h3>
+        <p>Bednění pro základy, stěny i stropy — sestavy na míru stavbě.</p>
+        <div class="tool-price">individuálně<small>dle rozsahu a doby</small></div>
+      </div>
+      <div class="tool">
+        <svg class="tool-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><circle cx="24" cy="22" r="12"/><path d="M24 34v8M14 42h20M18 14l12 8M30 14l-12 8"/></svg>
+        <h3>Stavební míchačka 125 l</h3>
+        <p>Spolehlivá míchačka na beton i maltu, 230 V.</p>
+        <div class="tool-price">od 250 Kč / den<small>kauce 2 000 Kč</small></div>
+      </div>
+      <div class="tool">
+        <svg class="tool-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><rect x="10" y="26" width="28" height="10" rx="2"/><path d="M18 26V14h12v12M24 8v6"/></svg>
+        <h3>Vibrační deska 90 kg</h3>
+        <p>Hutnění podkladů pod dlažbu, zásypy i vjezdy.</p>
+        <div class="tool-price">od 450 Kč / den<small>kauce 3 000 Kč</small></div>
+      </div>
+      <div class="tool">
+        <svg class="tool-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 6h16v14l-6 4v18h-4V24l-6-4V6zM20 6v8M28 6v8"/></svg>
+        <h3>Bourací kladivo</h3>
+        <p>Demolice příček, vybourání podlah a základů.</p>
+        <div class="tool-price">od 390 Kč / den<small>kauce 3 000 Kč</small></div>
+      </div>
+      <div class="tool">
+        <svg class="tool-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 14h24v10H8zM32 19h8M14 24v14M14 32l8 6"/></svg>
+        <h3>Ponorný vibrátor betonu</h3>
+        <p>Kvalitní zhutnění betonu základů a věnců.</p>
+        <div class="tool-price">od 300 Kč / den<small>kauce 2 000 Kč</small></div>
+      </div>
+      <div class="tool">
+        <svg class="tool-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="20" width="36" height="14" rx="2"/><circle cx="24" cy="27" r="4"/><path d="M14 20v-6h20v6"/></svg>
+        <h3>Řezačka dlažby</h3>
+        <p>Stolová řezačka s vodním chlazením pro přesné řezy.</p>
+        <div class="tool-price">od 350 Kč / den<small>kauce 2 000 Kč</small></div>
+      </div>
+      <div class="tool">
+        <svg class="tool-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 40V16l12-8 12 8v24M12 24h24M24 8v32"/></svg>
+        <h3>Stavební vrátek</h3>
+        <p>Vertikální doprava materiálu při rekonstrukcích a vestavbách.</p>
+        <div class="tool-price">od 600 Kč / den<small>kauce dle typu</small></div>
+      </div>
+    </div>
+    <p class="tools-note">Nenašli jste, co potřebujete? <a href="tel:+420725051860">Zavolejte</a> — v zázemí stavební firmy toho máme víc.</p>
+  </div>
+</section>
+
+<section class="why section-pad" id="proc">
+  <div class="wrap">
+    <div class="section-head" data-num="02">
+      <span class="eyebrow">Proč od nás</span>
+      <h2>Stroje, se kterými sami stavíme</h2>
+      <p class="lead">Nejsme překupník techniky. Půjčujeme přesně to, co denně používáme na vlastních stavbách — a rádi poradíme, jak na to.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-item">
+        <svg class="why-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 8 12v10c0 9 5 15 12 18 7-3 12-9 12-18V12L20 6z"/><path d="M14 22l4 4 8-9" stroke-width="2.4"/></svg>
+        <h3>Prověřená technika</h3>
+        <p>Každý stroj jede na našich stavbách. Co spolehlivě neslouží nám, nepůjčíme ani vám.</p>
+      </div>
+      <div class="why-item">
+        <svg class="why-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 34V14a4 4 0 014-4h24a4 4 0 014 4v14a4 4 0 01-4 4H18l-10 8V34z"/><path d="M16 19h16M16 25h10"/></svg>
+        <h3>Poradíme, ne jen půjčíme</h3>
+        <p>Řekneme vám, jaká deska na váš podklad nebo jak na bednění. Zkušenost je součástí zápůjčky.</p>
+      </div>
+      <div class="why-item">
+        <svg class="why-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><circle cx="24" cy="24" r="18"/><path d="M24 14v20M28.5 18.5c-1-1.6-2.7-2.5-4.5-2.5-2.8 0-5 1.8-5 4s2.2 3.5 5 4 5 1.8 5 4-2.2 4-5 4c-1.9 0-3.6-.9-4.6-2.5"/></svg>
+        <h3>Férové denní sazby</h3>
+        <p>Bez skrytých poplatků. Delší půjčení znamená lepší cenu — vždy potvrzenou předem.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="terms section-pad" id="podminky">
+  <div class="wrap">
+    <div class="section-head" data-num="03">
+      <span class="eyebrow">Jak to funguje</span>
+      <h2>Podmínky půjčení</h2>
+    </div>
+    <div class="terms-grid">
+      <div class="term"><span class="term-num">01</span><h3>Rezervace</h3><p>Telefonicky nebo formulářem. Nářadí vám podržíme na dohodnutý termín.</p></div>
+      <div class="term"><span class="term-num">02</span><h3>Kauce a doklad</h3><p>Vratná kauce dle nářadí a platný občanský průkaz. Vše vracíme při vrácení stroje.</p></div>
+      <div class="term"><span class="term-num">03</span><h3>Ceny a sazby</h3><p>Denní sazby, při delším půjčení sleva. Ceny potvrdíme předem — žádná překvapení.</p></div>
+      <div class="term"><span class="term-num">04</span><h3>Doprava a montáž</h3><p>Po domluvě dovezeme i smontujeme (lešení, bednění). V okolí Kyjova rychle.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad" id="poptavka">
+  <div class="wrap form-wrap">
+    <div class="c-side">
+      <span class="eyebrow">Rezervace</span>
+      <h2>Domluvte si nářadí předem</h2>
+      <p class="lead">Napište, co a na kdy potřebujete — potvrdíme dostupnost a cenu. Nejrychlejší je zavolat.</p>
+      <a class="tel" href="tel:+420725051860">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3-8.6A2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .4 1.9.7 2.8a2 2 0 01-.5 2.1L8.1 9.9a16 16 0 006 6l1.3-1.2a2 2 0 012.1-.5c.9.3 1.8.6 2.8.7a2 2 0 011.8 2z"/></svg>
+        +420 725 051 860
+      </a>
+      <p class="hours">Po–Pá 8:00–16:00 · Nádražní 611/17, Kyjov</p>
+    </div>
+
+    <form class="form" id="poptavka-form" novalidate>
+      <h3>Poptávka nářadí</h3>
+      <p class="fsub">Ozveme se zpravidla do jednoho pracovního dne.</p>
+      <div class="form-row">
+        <div class="field"><label for="jmeno">Jméno a příjmení</label><input id="jmeno" name="jmeno" type="text" placeholder="Jan Novák" autocomplete="name" required></div>
+        <div class="field"><label for="tel">Telefon</label><input id="tel" name="tel" type="tel" placeholder="+420 …" autocomplete="tel" required></div>
+      </div>
+      <div class="field"><label for="email">E-mail</label><input id="email" name="email" type="email" placeholder="jan@email.cz" autocomplete="email"></div>
+      <div class="form-row">
+        <div class="field">
+          <label for="naradi">Nářadí</label>
+          <select id="naradi" name="naradi">
+            <option>Fasádní lešení</option>
+            <option>Systémové bednění</option>
+            <option>Stavební míchačka</option>
+            <option>Vibrační deska</option>
+            <option>Bourací kladivo</option>
+            <option>Ponorný vibrátor betonu</option>
+            <option>Řezačka dlažby</option>
+            <option>Stavební vrátek</option>
+            <option>Jiné / kombinace</option>
+          </select>
+        </div>
+        <div class="field"><label for="termin">Termín (od–do)</label><input id="termin" name="termin" type="text" placeholder="např. 15.–20. 7."></div>
+      </div>
+      <div class="field"><label for="zprava">Poznámka</label><textarea id="zprava" name="zprava" placeholder="Rozsah, místo stavby, doprava…"></textarea></div>
+      <label class="consent"><input type="checkbox" id="souhlas" required>
+        <span>Souhlasím se zpracováním osobních údajů za účelem vyřízení poptávky.</span></label>
+      <input type="text" id="hpole" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button type="submit" class="btn btn-primary" id="submitBtn">Odeslat poptávku</button>
+      <p class="form-note">Vaše údaje použijeme výhradně k vyřízení poptávky.</p>
+      <details class="gdpr">
+        <summary>Zásady zpracování osobních údajů</summary>
+        <p>Správce: Stavební společnost SKELETA s.r.o., IČO 04788397, Nádražní 611/17, Kyjov.
+           Jméno, telefon a e-mail zpracováváme výhradně k vyřízení poptávky; pro technické doručení
+           využíváme službu FormSubmit. Máte právo na přístup, opravu i výmaz údajů.</p>
+      </details>
+      <div class="form-success" role="status" aria-live="polite">
+        <div class="fs-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></div>
+        <h3>Děkujeme, poptávka je na cestě!</h3>
+        <p id="successMsg">Ozveme se vám co nejdříve.</p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">
+    <a href="/">← Zpět na hlavní stránku SKELETA</a>
+    <small>© <span id="year">2026</span> Stavební společnost SKELETA s.r.o. · IČO 04788397 · Kyjov</small>
+  </div>
+</footer>
+
+<script>
+const header=document.getElementById('header');
+const progress=document.getElementById('scrollProgress');
+const onScroll=()=>{
+  header.classList.toggle('scrolled',window.scrollY>20);
+  const max=document.documentElement.scrollHeight-window.innerHeight;
+  if(progress&&max>0)progress.style.width=Math.min(100,(window.scrollY/max)*100)+'%';
+};
+onScroll();window.addEventListener('scroll',onScroll,{passive:true});
+document.getElementById('year').textContent=new Date().getFullYear();
+
+// Jemný reveal-on-scroll
+(()=>{
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver'in window))return;
+  document.querySelectorAll('.section-head,.tool,.why-item,.term,.form,.c-side').forEach((el,i)=>{el.classList.add('reveal');el.style.transitionDelay=((i%6)*40)+'ms';});
+  const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}}),{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+})();
+
+const FORM_ENDPOINT='https://formsubmit.co/ajax/info@skeleta.cz';
+(()=>{
+  const form=document.getElementById('poptavka-form');
+  const souhlas=document.getElementById('souhlas');
+  const btn=document.getElementById('submitBtn');
+  form.addEventListener('submit',e=>{
+    e.preventDefault();
+    const jmeno=document.getElementById('jmeno').value.trim();
+    const tel=document.getElementById('tel').value.trim();
+    const mail=document.getElementById('email').value.trim();
+    if(!jmeno||!tel){alert('Vyplňte prosím jméno a telefon.');return;}
+    if(!souhlas.checked){alert('Potvrďte prosím souhlas se zpracováním údajů.');souhlas.focus();return;}
+    const done=()=>{
+      form.classList.add('sent');
+      requestAnimationFrame(()=>{document.getElementById('successMsg').textContent=jmeno.split(' ')[0]+', ozveme se vám co nejdříve — zpravidla do jednoho pracovního dne.';});
+      const smooth=window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth';
+      form.querySelector('.form-success').scrollIntoView({block:'center',behavior:smooth});
+    };
+    if(document.getElementById('hpole').value){done();return;}
+    btn.disabled=true;btn.setAttribute('aria-busy','true');btn.textContent='Odesílám…';
+    fetch(FORM_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({
+        _subject:'Poptávka PŮJČOVNA — '+jmeno,_template:'table',_captcha:'false',_replyto:mail,
+        _honey:document.getElementById('hpole').value,
+        web:'SKELETA půjčovna (skeleta.cz/pujcovna.html)',
+        jmeno:jmeno,telefon:tel,email:mail,
+        naradi:document.getElementById('naradi').value,
+        termin:document.getElementById('termin').value.trim(),
+        zprava:document.getElementById('zprava').value.trim()
+      })
+    }).then(r=>r.json().catch(()=>({})).then(d=>{
+        if(!r.ok||String(d.success)!=='true')throw 0;
+        btn.removeAttribute('aria-busy');done();
+      }))
+      .catch(()=>{
+        btn.disabled=false;btn.removeAttribute('aria-busy');btn.textContent='Odeslat poptávku';
+        alert('Odeslání se nepodařilo. Zavolejte nám prosím na +420 725 051 860 — omlouváme se.');
+      });
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+# ── SKELETA — statický web (skeleta.cz) ──────────────────────────────
+# Umístění na serveru: /etc/caddy/Caddyfile (v kontejneru pro skeleta web)
+# Po změně: caddy validate --config /etc/caddy/Caddyfile && systemctl reload caddy
+# Certifikáty (Let's Encrypt) vystaví Caddy automaticky — vyžaduje, aby DNS
+# skeleta.cz + www.skeleta.cz mířilo na tento server a porty 80+443 byly otevřené.
+
+skeleta.cz, www.skeleta.cz {
+	# www → apex
+	@www host www.skeleta.cz
+	redir @www https://skeleta.cz{uri} permanent
+
+	root * /srv/skeleta-web
+	file_server
+	encode gzip zstd
+
+	header {
+		# HSTS zprvu jen 1 den; po ~2 týdnech stabilního provozu zvednout na 31536000
+		Strict-Transport-Security "max-age=86400"
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "SAMEORIGIN"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		# POZOR: connect-src musí povolit formsubmit.co, jinak poptávkový formulář neodešle
+		Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://formsubmit.co; frame-src https://www.openstreetmap.org; frame-ancestors 'self'; base-uri 'self'; object-src 'none'"
+		-Server
+	}
+
+	log {
+		output file /var/log/caddy/skeleta-access.log
+		format json
+	}
+}
