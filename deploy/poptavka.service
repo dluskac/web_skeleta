@@ -4,6 +4,7 @@ After=network-online.target
 
 [Service]
 EnvironmentFile=-/etc/poptavka.env
+StateDirectory=poptavka
 ExecStart=/usr/bin/python3 /srv/skeleta-web/deploy/poptavka.py
 Restart=always
 RestartSec=3

@@ -12,10 +12,16 @@ import json
 import os
 import re
 import smtplib
+import threading
 import time
+import uuid
 from email.message import EmailMessage
 from email.utils import formatdate, make_msgid
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+
+# Fronta nedoručených poptávek (výpadek/ban SMTP) — zkouší se znovu à 10 min
+STATE_DIR = os.environ.get("STATE_DIRECTORY", "/var/lib/poptavka")
+RETRY_EVERY = 600
 
 TO = "info@skeleta.cz"
 FROM = "web@skeleta.cz"          # SPF domény povoluje IP webu (mechanismus "a")
@@ -118,7 +124,10 @@ class Handler(BaseHTTPRequestHandler):
                 return self._json(200, True)   # bot v pasti — tváříme se spokojeně
             if not _allowed(ip):
                 return self._json(429, False)
-            _send(data, ip)
+            try:
+                _send(data, ip)
+            except Exception:
+                _enqueue(data, ip)             # doručíme později, poptávka se neztratí
             return self._json(200, True)
         except Exception:
             # JS větev formuláře při success!=true nabídne telefon — správný fallback
@@ -128,5 +137,31 @@ class Handler(BaseHTTPRequestHandler):
         pass
 
 
+def _enqueue(data, ip):
+    os.makedirs(STATE_DIR, exist_ok=True)
+    path = os.path.join(STATE_DIR, f"{int(time.time())}-{uuid.uuid4().hex[:8]}.json")
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump({"ip": ip, "data": data}, f, ensure_ascii=False)
+
+
+def _retry_loop():
+    while True:
+        time.sleep(RETRY_EVERY)
+        try:
+            files = sorted(os.listdir(STATE_DIR)) if os.path.isdir(STATE_DIR) else []
+            for name in files:
+                path = os.path.join(STATE_DIR, name)
+                try:
+                    with open(path, encoding="utf-8") as f:
+                        item = json.load(f)
+                    _send(item["data"], item.get("ip", "?"))
+                    os.remove(path)
+                except Exception:
+                    break   # server pořád nedostupný — zkusíme za 10 minut
+        except Exception:
+            pass
+
+
 if __name__ == "__main__":
+    threading.Thread(target=_retry_loop, daemon=True).start()
     ThreadingHTTPServer(("127.0.0.1", 8090), Handler).serve_forever()
