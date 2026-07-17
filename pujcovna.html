@@ -431,8 +431,8 @@ details.gdpr p{margin-top:8px}
       <details class="gdpr">
         <summary>Zásady zpracování osobních údajů</summary>
         <p>Správce: Stavební společnost SKELETA s.r.o., IČO 04788397, Nádražní 611/17, Kyjov.
-           Jméno, telefon a e-mail zpracováváme výhradně k vyřízení poptávky; pro technické doručení
-           využíváme službu FormSubmit. Máte právo na přístup, opravu i výmaz údajů.</p>
+           Jméno, telefon a e-mail zpracováváme výhradně k vyřízení poptávky; poptávka se doručuje
+           přímo do firemní schránky bez služeb třetích stran. Máte právo na přístup, opravu i výmaz údajů.</p>
       </details>
       <div class="form-success" role="status" aria-live="polite">
         <div class="fs-ico"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></div>
@@ -469,7 +469,7 @@ document.getElementById('year').textContent=new Date().getFullYear();
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 })();
 
-const FORM_ENDPOINT='https://formsubmit.co/ajax/info@skeleta.cz';
+const FORM_ENDPOINT='/api/poptavka';
 (()=>{
   const form=document.getElementById('poptavka-form');
   const souhlas=document.getElementById('souhlas');

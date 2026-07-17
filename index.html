@@ -1140,7 +1140,7 @@ h1,h2,h3{text-wrap:balance}
     <h4>Správce údajů</h4>
     <p>Stavební společnost SKELETA s.r.o., IČO 04788397, Nádražní 611/17, 697 01 Kyjov.</p>
     <h4>Jaké údaje a proč</h4>
-    <p>Z kontaktního formuláře zpracováváme jméno, telefon a e-mail výhradně za účelem vyřízení vaší poptávky. Pro technické doručení poptávky využíváme službu FormSubmit; údaje uchováváme pouze po dobu nezbytnou k vyřízení a nevyužíváme je k marketingu.</p>
+    <p>Z kontaktního formuláře zpracováváme jméno, telefon a e-mail výhradně za účelem vyřízení vaší poptávky. Poptávka se doručuje přímo do firemní e-mailové schránky bez využití služeb třetích stran; údaje uchováváme pouze po dobu nezbytnou k vyřízení a nevyužíváme je k marketingu.</p>
     <h4>Vaše práva</h4>
     <p>Máte právo na přístup ke svým údajům, jejich opravu i výmaz. Stačí nás kontaktovat na info@skeleta.cz.</p>
     <button class="btn btn-dark modal-close" id="closeGdpr" autofocus>Rozumím</button>
@@ -1214,10 +1214,9 @@ links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.clas
 // Rok v patičce
 document.getElementById('year').textContent=new Date().getFullYear();
 
-// Poptávkový formulář — ŽIVÉ odeslání přes FormSubmit (bez serveru).
-// Poptávky chodí na e-mail níže; první odeslání vyžaduje jednorázovou aktivaci
-// (FormSubmit pošle na ten e-mail potvrzovací odkaz). E-mail lze kdykoli změnit zde:
-const FORM_ENDPOINT='https://formsubmit.co/ajax/info@skeleta.cz';
+// Poptávkový formulář — odeslání přes vlastní backend serveru (/api/poptavka,
+// viz deploy/poptavka.py). Doručuje přímo do info@skeleta.cz, žádná aktivace.
+const FORM_ENDPOINT='/api/poptavka';
 (()=>{
   const form=document.getElementById('poptavka');
   const souhlas=document.getElementById('souhlas');

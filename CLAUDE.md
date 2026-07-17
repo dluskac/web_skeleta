@@ -28,15 +28,16 @@ support David Luskač (@dluskac) — na něj odkazuj věci kolem hostingu/deploy
   border-top nad kontejnerem.
 - Na stránce půjčovny záměrně NENÍ běžící pásek (marquee) — nepřidávat.
 
-## ⚠️ Formulář (nejčastější past)
+## ⚠️ Formulář
 
-Poptávky jdou přes **FormSubmit AJAX** (`FORM_ENDPOINT` v obou souborech,
-cíl info@skeleta.cz). Zásadní: FormSubmit umí vrátit **HTTP 200 a přitom
-`success:false`** — odpověď se MUSÍ parsovat (stávající kód to dělá:
-`if(!r.ok || String(d.success)!=='true') throw 0;`). Při úpravách formuláře
-tuhle kontrolu zachovat, jinak se poptávky tiše ztrácí. Honeypot pole
-`_honey` nechat. Hosting musí mít v CSP `connect-src https://formsubmit.co`
-(v `deploy/Caddyfile` už je).
+Poptávky jdou na **vlastní backend** `/api/poptavka` (`FORM_ENDPOINT` v obou
+souborech) — malá systemd služba `poptavka` na serveru (`deploy/poptavka.py`),
+která e-mail doručí přímo na poštovní server domény (MX). Žádná třetí strana.
+Kontrakt odpovědi: JSON `{"success":"true"}` — JS kontrolu
+`if(!r.ok || String(d.success)!=='true') throw 0;` zachovat (při chybě nabídne
+telefon). Honeypot pole `_honey` nechat (backend ho zná a bota tiše odbyde).
+Po změně `deploy/poptavka.py` je na serveru potřeba `systemctl restart poptavka`
+(git pull soubor stáhne, ale službu nerestartuje).
 
 ## Ověření po úpravách
 
