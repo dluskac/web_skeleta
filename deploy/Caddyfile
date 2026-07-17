@@ -13,6 +13,10 @@ skeleta.cz, www.skeleta.cz {
 	file_server
 	encode gzip zstd
 
+	# Staré adresy z dob Webnode webu, na které vedou odkazy z internetu
+	redir /kontakt /#kontakt permanent
+	redir /kontakt/ /#kontakt permanent
+
 	header {
 		# HSTS zprvu jen 1 den; po ~2 týdnech stabilního provozu zvednout na 31536000
 		Strict-Transport-Security "max-age=86400"
