@@ -13,7 +13,8 @@ Vanilla HTML/CSS/JS, **žádný build** — každá stránka je jeden self-conta
 s inline `<style>` a `<script>`. Editace = úprava souboru + push do `main`;
 server si změny automaticky stáhne (viz `deploy/SETUP.md`).
 
-Poptávkový formulář jde přes FormSubmit na `info@skeleta.cz` (bez backendu).
+Poptávkový formulář jde přes vlastní backend `/api/poptavka` (deploy/poptavka.py)
+přímo do `info@skeleta.cz` — bez třetích stran.
 
 Historicky web vznikl v repu BlackTalon-Investment (složka `skeleta/`, dočasně
 hostováno na blacktalon.cz/skeleta) — tam je i historie úprav do 07/2026.
