@@ -9,6 +9,7 @@ schránku, což SMTP dovoluje bez přihlášení.
 Odpověď drží kontrakt formulářového JS: {"success":"true"} / {"success":"false"}.
 """
 import json
+import os
 import re
 import smtplib
 import time
@@ -19,6 +20,14 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 TO = "info@skeleta.cz"
 FROM = "web@skeleta.cz"          # SPF domény povoluje IP webu (mechanismus "a")
 MX = "ser10.vas-server.cz"
+
+# Přihlášené odesílání (obchází IP blacklisty) — přihlašovací údaje čte služba
+# z /etc/poptavka.env (SMTP_USER + SMTP_PASS, volitelně SMTP_HOST/SMTP_PORT).
+# Bez nich se zkusí přímé doručení na MX (funguje, jen když IP není na blacklistu).
+SMTP_USER = os.environ.get("SMTP_USER")
+SMTP_PASS = os.environ.get("SMTP_PASS")
+SMTP_HOST = os.environ.get("SMTP_HOST", MX)
+SMTP_PORT = int(os.environ.get("SMTP_PORT", "587"))
 MAX_BODY = 64 * 1024
 WINDOW, LIMIT = 3600, 6          # ochrana: max 6 poptávek za hodinu z jedné IP
 _hits = {}
@@ -48,9 +57,11 @@ def _send(data, client_ip):
         lines.append(f"{FIELD_LABELS.get(key, key)}: {val}")
     lines += ["", f"— odesláno formulářem na skeleta.cz (IP {client_ip})"]
 
+    sender = SMTP_USER if (SMTP_USER and SMTP_PASS) else FROM
+
     msg = EmailMessage()
     msg["Subject"] = subject
-    msg["From"] = f"Web skeleta.cz <{FROM}>"
+    msg["From"] = f"Web skeleta.cz <{sender}>"
     msg["To"] = TO
     msg["Date"] = formatdate(localtime=True)
     msg["Message-ID"] = make_msgid(domain="skeleta.cz")
@@ -58,15 +69,26 @@ def _send(data, client_ip):
         msg["Reply-To"] = reply
     msg.set_content("\n".join(lines))
 
-    smtp = smtplib.SMTP(MX, 25, timeout=15)
-    try:
-        smtp.ehlo()
-        if smtp.has_extn("starttls"):
+    if SMTP_USER and SMTP_PASS:
+        smtp = smtplib.SMTP(SMTP_HOST, SMTP_PORT, timeout=15)
+        try:
+            smtp.ehlo()
             smtp.starttls()
             smtp.ehlo()
-        smtp.send_message(msg, from_addr=FROM, to_addrs=[TO])
-    finally:
-        smtp.quit()
+            smtp.login(SMTP_USER, SMTP_PASS)
+            smtp.send_message(msg, from_addr=sender, to_addrs=[TO])
+        finally:
+            smtp.quit()
+    else:
+        smtp = smtplib.SMTP(MX, 25, timeout=15)
+        try:
+            smtp.ehlo()
+            if smtp.has_extn("starttls"):
+                smtp.starttls()
+                smtp.ehlo()
+            smtp.send_message(msg, from_addr=sender, to_addrs=[TO])
+        finally:
+            smtp.quit()
 
 
 class Handler(BaseHTTPRequestHandler):

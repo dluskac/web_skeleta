@@ -3,6 +3,7 @@ Description=Poptavkovy formular skeleta.cz (vlastni backend, port 8090)
 After=network-online.target
 
 [Service]
+EnvironmentFile=-/etc/poptavka.env
 ExecStart=/usr/bin/python3 /srv/skeleta-web/deploy/poptavka.py
 Restart=always
 RestartSec=3
