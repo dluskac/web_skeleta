@@ -1,7 +1,25 @@
 # Nasazení skeleta.cz na Proxmox
 
+## Zadání (TL;DR pro IT)
+
+Tento repozitář je **statický web** (čisté HTML + obrázky, žádná databáze,
+žádný backend — formulář jde přes externí službu). Potřebujeme od vás tři věci:
+
+1. **Odpovědět na otázku dostupnosti:** má server veřejnou (ideálně statickou)
+   IP a lze na ni otevřít/přesměrovat porty **80 a 443**? (Detail níže.)
+2. **Postavit malý LXC kontejner** podle kroků 1–3 níže (Caddy + git,
+   ~30 minut práce). Po zprovoznění je údržba nulová — obsah se aktualizuje
+   sám z GitHubu, certifikáty si Caddy obnovuje sám.
+3. **Vrátit nám veřejnou IP adresu** serveru — na ni pak necháme přesměrovat
+   DNS záznam domény skeleta.cz.
+
+⚠️ **Prosíme NEměnit nic na DNS ani u e-mailů @skeleta.cz** — změnu DNS
+koordinujeme sami (běží na ní firemní pošta). Od vás potřebujeme jen server a IP.
+
+---
+
 Cíl: malý samostatný LXC kontejner, který servíruje tento repozitář přes Caddy
-a sám si stahuje změny z GitHubu. Úplně oddělené od BlackTalonu.
+a sám si stahuje změny z GitHubu.
 
 ## Předpoklad (ověřit PŘED vším ostatním)
 
@@ -19,13 +37,14 @@ Na Proxmox firewallu/routeru přesměrovat porty 80 a 443 na tento kontejner.
 
 ```bash
 apt update && apt install -y caddy git
-git clone https://github.com/<UCET>/<REPO>.git /srv/skeleta-web
+git clone https://github.com/dluskac/web_skeleta.git /srv/skeleta-web
 cp /srv/skeleta-web/deploy/Caddyfile /etc/caddy/Caddyfile
 caddy validate --config /etc/caddy/Caddyfile && systemctl reload caddy
 ```
 
-(U soukromého repa použít deploy key: `ssh-keygen -t ed25519`, veřejný klíč
-vložit na GitHubu do Settings → Deploy keys, klonovat přes SSH URL.)
+(Repo je veřejné, klonování funguje bez přihlášení. Kdyby se později přepnulo
+na soukromé, použít deploy key: `ssh-keygen -t ed25519`, veřejný klíč vložit
+na GitHubu do Settings → Deploy keys, klonovat přes SSH URL.)
 
 ## 3) Auto-aktualizace z GitHubu (pull každou minutu)
 
