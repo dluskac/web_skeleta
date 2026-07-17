@@ -208,17 +208,6 @@ section{scroll-margin-top:118px}
 .hero-chip:hover{background:rgba(115,37,89,.72);transform:translateY(-2px)}
 .hero-chip .ht-arrow{font-size:1.05rem;transition:transform var(--ease)}
 .hero-chip:hover .ht-arrow{transform:translateX(4px)}
-.hero-tease{display:flex;align-items:center;gap:14px;
-  max-width:330px;padding:15px 19px;border-radius:var(--radius);color:#fff;
-  background:rgba(27,23,20,.44);border:1px solid rgba(255,255,255,.16);
-  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  transition:background var(--ease),transform var(--ease)}
-.hero-tease:hover{background:rgba(27,23,20,.62);transform:translateY(-2px)}
-.hero-tease .ht-txt{display:flex;flex-direction:column;gap:3px}
-.hero-tease .ht-kicker{font-size:.64rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-on-dark)}
-.hero-tease .ht-title{font-family:var(--display);font-weight:600;font-size:.98rem;line-height:1.3}
-.hero-tease .ht-arrow{font-family:var(--display);font-size:1.15rem;transition:transform var(--ease)}
-.hero-tease:hover .ht-arrow{transform:translateX(4px)}
 @media(max-width:680px){.hero-side{display:none}}
 
 /* ===== Trust bar ===== */
@@ -654,6 +643,14 @@ h1,h2,h3{text-wrap:balance}
   .person{flex-wrap:wrap}
   .person .p-call{margin-left:0;width:100%;padding-top:6px}
 }
+
+/* ===== DOČASNĚ SKRYTO (na přání) — pro obnovení smazat celý tento blok ===== */
+/* Fotky realizace u flagship reference ZŠ Bohuslavice (before/after posuvník) */
+.refs .ba{display:none}
+.ref-feature{grid-template-columns:1fr}
+/* Celá sekce „Co říkají zákazníci" */
+.reviews{display:none}
+/* ===== /DOČASNĚ SKRYTO ===== */
 </style>
 </head>
 <body>
@@ -734,13 +731,6 @@ h1,h2,h3{text-wrap:balance}
 
   <div class="hero-side">
     <a class="hero-chip" href="/pujcovna.html">Půjčovna nářadí a lešení <span class="ht-arrow" aria-hidden="true">→</span></a>
-    <a class="hero-tease" href="#reference">
-      <span class="ht-txt">
-        <span class="ht-kicker">Referenční stavba</span>
-        <span class="ht-title">ZŠ Bohuslavice u Kyjova — zakázka pro Město Kyjov</span>
-      </span>
-      <span class="ht-arrow" aria-hidden="true">→</span>
-    </a>
   </div>
 </section>
 
@@ -881,45 +871,41 @@ h1,h2,h3{text-wrap:balance}
            z Evropského fondu pro regionální rozvoj (IROP).</p>
         <div class="ref-meta">
           <span><b>Investor:</b> Město Kyjov</span>
-          <span><b>Rok:</b> 2020</span>
+          <span><b>Rok realizace:</b> 2020–2021</span>
           <span><b>Financování:</b> EU / IROP</span>
         </div>
-        <div class="ref-price">11 919 265 Kč vč. DPH</div>
+        <div class="ref-price">9 850 632 Kč bez DPH</div>
       </div>
     </article>
 
     <!-- Další realizace -->
     <div class="ref-grid">
       <article class="ref-card">
-        <div class="photo-slot"><img src="/img/ref-2.jpg" alt="Rekonstrukce rodinného domu" loading="lazy" onerror="this.remove()"></div>
         <div class="ref-card-body">
-          <h4>RD Kyjov — Klínky</h4>
-          <div class="rc-meta">Celková modernizace interiéru, výměna oken a dveří, zateplení fasády a střechy.</div>
-          <span class="rc-tag">Rodinný dům</span>
+          <h4>Mistřínský Dvůr</h4>
+          <div class="rc-meta">Rok realizace: 2025–2026</div>
+          <span class="rc-tag">20 693 032 Kč bez DPH</span>
         </div>
       </article>
       <article class="ref-card">
-        <div class="photo-slot"><img src="/img/ref-3.jpg" alt="Rodinný dům po modernizaci" loading="lazy" onerror="this.remove()"></div>
         <div class="ref-card-body">
-          <h4>RD Kyjov-Hýsly — „Josefínský dvůr"</h4>
-          <div class="rc-meta">Vnitřní stavební práce, zateplení obvodových stěn a úpravy zpevněných ploch.</div>
-          <span class="rc-tag">Rodinný dům</span>
+          <h4>ZENERGO a.s.</h4>
+          <div class="rc-meta">Rok realizace: 2020–2021</div>
+          <span class="rc-tag">47 071 151 Kč bez DPH</span>
         </div>
       </article>
       <article class="ref-card">
-        <div class="photo-slot"><img src="/img/ref-4.jpg" alt="Realizace SKELETA" loading="lazy" onerror="this.remove()"></div>
         <div class="ref-card-body">
-          <h4>MŠ Kyjov, Nádražní</h4>
-          <div class="rc-meta">Kompletní interiérová obnova pavilonů „Motýlků" a „Logotřídy" včetně sociálního zázemí.</div>
-          <span class="rc-tag">Občanská vybavenost</span>
+          <h4>Vinařství Pastorek</h4>
+          <div class="rc-meta">Novostavba vinařství a ubytování · Rok realizace: 2023–2025</div>
+          <span class="rc-tag">23 321 997 Kč bez DPH</span>
         </div>
       </article>
       <article class="ref-card">
-        <div class="photo-slot"><img src="/img/ref-5.jpg" alt="Realizace SKELETA" loading="lazy" onerror="this.remove()"></div>
         <div class="ref-card-body">
-          <h4>MŠ Bohuslavice u Kyjova</h4>
-          <div class="rc-meta">Obnova sociálního zázemí — WC a umývárny mateřské školy.</div>
-          <span class="rc-tag">Občanská vybavenost</span>
+          <h4>Stavební úpravy MŠ a ZŠ Lovčice</h4>
+          <div class="rc-meta">Nástavba podkroví · Investor: Obec Lovčice · Rok realizace: 2026</div>
+          <span class="rc-tag">15 065 408 Kč bez DPH</span>
         </div>
       </article>
     </div>
