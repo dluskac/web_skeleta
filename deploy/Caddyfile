@@ -29,3 +29,12 @@ skeleta.cz, www.skeleta.cz {
 		format json
 	}
 }
+
+# ── LAN náhled (jen z domácí sítě, port 8080, bez HTTPS redirectu) ──
+# Ve firewallu kontejneru je 8080 povolen pouze pro 192.168.1.0/24;
+# router ho z internetu nepřesměrovává. Adresa: http://192.168.1.90:8080
+http://:8080 {
+	root * /srv/skeleta-web
+	file_server
+	encode gzip zstd
+}
