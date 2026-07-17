@@ -3,18 +3,25 @@
 ## Zadání (TL;DR pro IT)
 
 Tento repozitář je **statický web** (čisté HTML + obrázky, žádná databáze,
-žádný backend — formulář jde přes externí službu). Potřebujeme od vás tři věci:
+žádný backend — poptávkový formulář jde přes externí službu FormSubmit).
+**Repo na GitHubu = jediný zdroj obsahu webu**; úpravy se dělají commitem sem.
 
-1. **Odpovědět na otázku dostupnosti:** má server veřejnou (ideálně statickou)
-   IP a lze na ni otevřít/přesměrovat porty **80 a 443**? (Detail níže.)
-2. **Postavit malý LXC kontejner** podle kroků 1–3 níže (Caddy + git,
-   ~30 minut práce). Po zprovoznění je údržba nulová — obsah se aktualizuje
-   sám z GitHubu, certifikáty si Caddy obnovuje sám.
-3. **Vrátit nám veřejnou IP adresu** serveru — na ni pak necháme přesměrovat
-   DNS záznam domény skeleta.cz.
+**DNS a e-maily domény skeleta.cz spravujete vy** — my dodáváme jen web.
+Pro hosting jsou dvě cesty, výběr je na vás:
 
-⚠️ **Prosíme NEměnit nic na DNS ani u e-mailů @skeleta.cz** — změnu DNS
-koordinujeme sami (běží na ní firemní pošta). Od vás potřebujeme jen server a IP.
+**A) Náš Proxmox** — postavíme malý LXC kontejner podle kroků 1–3 níže
+(Caddy + automatický git pull, údržba nulová) a dodáme vám veřejnou IP;
+vy na ni pak přesměrujete DNS (apex A záznam + www).
+
+**B) Vaše řešení** — web umí servírovat cokoliv, co zvládne statické soubory
+přes HTTPS. Doporučujeme nastavit automatické stahování změn z GitHubu
+(git pull timer, krok 3), ať úpravy webu doputují na doménu bez ručního
+nasazování. Repo je veřejné, klonování nevyžaduje přihlášení.
+
+ℹ️ K DNS jen naměřená fakta (kdyby se hodila): web dnes míří na mrtvý Webnode
+(apex A 3.73.27.108 + 3.125.172.46, www = CNAME na skeleta.webnode.cz),
+TTL 600 s. Na doméně běží firemní pošta — MX ser10.vas-server.cz, TXT
+SPF/DMARC, subdomény mail + autoconfig.
 
 ---
 
