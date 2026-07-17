@@ -12,6 +12,7 @@ import json
 import os
 import re
 import smtplib
+import socket
 import threading
 import time
 import uuid
@@ -19,9 +20,18 @@ from email.message import EmailMessage
 from email.utils import formatdate, make_msgid
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
-# Fronta nedoručených poptávek (výpadek/ban SMTP) — zkouší se znovu à 10 min
+# Fronta nedoručených poptávek (výpadek/ban SMTP). Interval schválně delší,
+# aby časté pokusy z blacklistované IP nedráždily fail2ban poštovního serveru.
 STATE_DIR = os.environ.get("STATE_DIRECTORY", "/var/lib/poptavka")
-RETRY_EVERY = 600
+RETRY_EVERY = 1800
+
+
+def _ipv4(host):
+    """Kontejner nemá IPv6 konektivitu — vynutit A záznam, ať se neplýtvá pokusy."""
+    try:
+        return socket.getaddrinfo(host, None, socket.AF_INET)[0][4][0]
+    except Exception:
+        return host
 
 TO = "info@skeleta.cz"
 FROM = "web@skeleta.cz"          # SPF domény povoluje IP webu (mechanismus "a")
@@ -110,7 +120,7 @@ def _send(data, client_ip):
     msg.add_alternative(html_body, subtype="html")
 
     if SMTP_USER and SMTP_PASS:
-        smtp = smtplib.SMTP(SMTP_HOST, SMTP_PORT, timeout=15)
+        smtp = smtplib.SMTP(_ipv4(SMTP_HOST), SMTP_PORT, timeout=15)
         try:
             smtp.ehlo()
             smtp.starttls()
@@ -120,7 +130,7 @@ def _send(data, client_ip):
         finally:
             smtp.quit()
     else:
-        smtp = smtplib.SMTP(MX, 25, timeout=15)
+        smtp = smtplib.SMTP(_ipv4(MX), 25, timeout=15)
         try:
             smtp.ehlo()
             if smtp.has_extn("starttls"):
