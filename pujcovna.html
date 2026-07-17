@@ -103,14 +103,15 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .lead{font-size:1.1rem;color:var(--muted);text-wrap:pretty}
 /* Ceník — kategorie s položkami a cenami */
 .pricelist{display:grid;grid-template-columns:repeat(2,1fr);gap:26px}
-.pl-group{background:var(--bg);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);
+/* Karty sjednocené s hlavní stránkou (.ref-card vzor) + rodinná švestková linka
+   nahoře (stejný motiv jako číslované kroky). Fotka kategorie = vodoznak pod ceníkem. */
+.pl-group{position:relative;background:var(--bg);border:1px solid var(--line);border-top:2px solid var(--accent);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);
   transition:transform var(--ease),box-shadow var(--ease)}
 .pl-group:hover{transform:translateY(-3px);box-shadow:0 1px 2px rgba(27,23,20,.06),0 18px 40px rgba(27,23,20,.09)}
-.pl-photo{height:150px;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.pl-photo img{max-width:100%;max-height:100%;width:auto;object-fit:contain;padding:14px}
-.pl-group h3{font-size:1.05rem;padding:16px 24px;background:var(--surface-alt);
-  border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.pl-list{list-style:none;padding:6px 24px 16px}
+.pl-watermark{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:0}
+.pl-watermark img{max-width:82%;max-height:74%;object-fit:contain;opacity:.15;filter:grayscale(10%)}
+.pl-group h3{position:relative;z-index:1;font-size:1.15rem;padding:24px 26px 2px}
+.pl-list{position:relative;z-index:1;list-style:none;padding:10px 26px 18px}
 .pl-list li{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:11px 0;border-bottom:1px solid var(--line)}
 .pl-list li:last-child{border-bottom:0}
 .pl-name{color:var(--body);font-size:.92rem}
@@ -247,7 +248,7 @@ details.gdpr p{margin-top:8px}
     <div class="pricelist">
       <!-- Lešení a bednění (v popředí) -->
       <div class="pl-group">
-        <div class="pl-photo"><img src="/img/pujcovna-leseni.jpg" alt="Fasádní lešení a bednění" loading="lazy" onerror="this.closest('.pl-photo').remove()"></div>
+        <div class="pl-watermark" aria-hidden="true"><img src="/img/pujcovna-leseni.jpg" alt="" loading="lazy" onerror="this.closest('.pl-watermark').remove()"></div>
         <h3>Lešení a bednění</h3>
         <ul class="pl-list">
           <li><span class="pl-name">Fasádní lešení<small>k dispozici cca 1 000 m²</small></span><span class="pl-price pl-req">na dotaz</span></li>
@@ -257,7 +258,7 @@ details.gdpr p{margin-top:8px}
 
       <!-- Vibrační technika -->
       <div class="pl-group">
-        <div class="pl-photo"><img src="/img/pujcovna-vibracni.jpg" alt="Vibrační deska BOMAG" loading="lazy" onerror="this.closest('.pl-photo').remove()"></div>
+        <div class="pl-watermark" aria-hidden="true"><img src="/img/pujcovna-vibracni.jpg" alt="" loading="lazy" onerror="this.closest('.pl-watermark').remove()"></div>
         <h3>Vibrační technika</h3>
         <ul class="pl-list">
           <li><span class="pl-name">Vibrační deska BOMAG 100 kg</span><span class="pl-price">500 Kč</span></li>
@@ -271,7 +272,7 @@ details.gdpr p{margin-top:8px}
 
       <!-- Pily a řezání -->
       <div class="pl-group">
-        <div class="pl-photo"><img src="/img/pujcovna-pily.jpg" alt="Kotoučová pila a pila Aligator" loading="lazy" onerror="this.closest('.pl-photo').remove()"></div>
+        <div class="pl-watermark" aria-hidden="true"><img src="/img/pujcovna-pily.jpg" alt="" loading="lazy" onerror="this.closest('.pl-watermark').remove()"></div>
         <h3>Pily a řezání</h3>
         <ul class="pl-list">
           <li><span class="pl-name">Vodou chlazená stolová pila<small>na Porotherm</small></span><span class="pl-price">400 Kč</span></li>
@@ -284,7 +285,7 @@ details.gdpr p{margin-top:8px}
 
       <!-- Kladiva a vrtačky -->
       <div class="pl-group">
-        <div class="pl-photo"><img src="/img/pujcovna-kladiva.jpg" alt="Příklepová vrtačka" loading="lazy" onerror="this.closest('.pl-photo').remove()"></div>
+        <div class="pl-watermark" aria-hidden="true"><img src="/img/pujcovna-kladiva.jpg" alt="" loading="lazy" onerror="this.closest('.pl-watermark').remove()"></div>
         <h3>Kladiva a vrtačky</h3>
         <ul class="pl-list">
           <li><span class="pl-name">Bourací kladivo</span><span class="pl-price">380 Kč</span></li>
@@ -296,7 +297,7 @@ details.gdpr p{margin-top:8px}
 
       <!-- Brusky -->
       <div class="pl-group">
-        <div class="pl-photo"><img src="/img/pujcovna-brusky.jpg" alt="Úhlová bruska" loading="lazy" onerror="this.closest('.pl-photo').remove()"></div>
+        <div class="pl-watermark" aria-hidden="true"><img src="/img/pujcovna-brusky.jpg" alt="" loading="lazy" onerror="this.closest('.pl-watermark').remove()"></div>
         <h3>Brusky</h3>
         <ul class="pl-list">
           <li><span class="pl-name">Úhlová bruska velká</span><span class="pl-price">120 Kč</span></li>
@@ -307,7 +308,7 @@ details.gdpr p{margin-top:8px}
 
       <!-- Míchání, energie a měření -->
       <div class="pl-group">
-        <div class="pl-photo"><img src="/img/pujcovna-michani.jpg" alt="Stavební míchačka" loading="lazy" onerror="this.closest('.pl-photo').remove()"></div>
+        <div class="pl-watermark" aria-hidden="true"><img src="/img/pujcovna-michani.jpg" alt="" loading="lazy" onerror="this.closest('.pl-watermark').remove()"></div>
         <h3>Míchání, energie a měření</h3>
         <ul class="pl-list">
           <li><span class="pl-name">Míchačka</span><span class="pl-price">130 Kč</span></li>
@@ -318,7 +319,7 @@ details.gdpr p{margin-top:8px}
 
       <!-- Ostatní vybavení -->
       <div class="pl-group">
-        <div class="pl-photo"><img src="/img/pujcovna-ostatni.jpg" alt="Kompresor a další vybavení" loading="lazy" onerror="this.closest('.pl-photo').remove()"></div>
+        <div class="pl-watermark" aria-hidden="true"><img src="/img/pujcovna-ostatni.jpg" alt="" loading="lazy" onerror="this.closest('.pl-watermark').remove()"></div>
         <h3>Ostatní vybavení</h3>
         <ul class="pl-list">
           <li><span class="pl-name">Průmyslový vysavač Metabo</span><span class="pl-price">180 Kč</span></li>
