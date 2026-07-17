@@ -38,8 +38,10 @@ MAX_BODY = 64 * 1024
 WINDOW, LIMIT = 3600, 6          # ochrana: max 6 poptávek za hodinu z jedné IP
 _hits = {}
 
-FIELD_LABELS = {"jmeno": "Jméno", "telefon": "Telefon", "email": "E-mail",
-                "zprava": "Zpráva", "typ": "Typ poptávky", "web": "Odesláno z"}
+FIELD_ORDER = ["jmeno", "telefon", "email", "zajem", "naradi", "termin", "zprava"]
+FIELD_LABELS = {"jmeno": "Jméno a příjmení", "telefon": "Telefon", "email": "E-mail",
+                "zajem": "Co poptává", "naradi": "Nářadí", "termin": "Termín",
+                "zprava": "Zpráva"}
 
 
 def _allowed(ip):
@@ -54,14 +56,45 @@ def _allowed(ip):
 
 
 def _send(data, client_ip):
+    import html as h
     subject = str(data.get("_subject") or "Poptávka z webu skeleta.cz").strip()[:150]
     reply = str(data.get("_replyto") or data.get("email") or "").strip()
-    lines = []
+
+    # Známá pole v pevném pořadí, pak případná neznámá — nic se neztratí
+    items = []
+    for key in FIELD_ORDER:
+        val = data.get(key)
+        if val not in (None, ""):
+            items.append((FIELD_LABELS[key], str(val)))
     for key, val in data.items():
-        if key.startswith("_") or val in (None, ""):
+        if key.startswith("_") or key in FIELD_ORDER or key == "web" or val in (None, ""):
             continue
-        lines.append(f"{FIELD_LABELS.get(key, key)}: {val}")
-    lines += ["", f"— odesláno formulářem na skeleta.cz (IP {client_ip})"]
+        items.append((key, str(val)))
+    meta = [("Odesláno ze stránky", str(data.get("web") or "skeleta.cz")),
+            ("Datum", time.strftime("%d.%m.%Y %H:%M")),
+            ("IP návštěvníka", client_ip)]
+
+    text = "\n".join(f"{lbl}: {val}" for lbl, val in items) \
+        + "\n\n———\n" + "\n".join(f"{lbl}: {val}" for lbl, val in meta)
+
+    rows = "".join(
+        f'<tr><td style="padding:11px 0 11px 26px;color:#6a6259;font-size:13px;'
+        f'vertical-align:top;width:140px;border-bottom:1px solid #f1ece4">{h.escape(lbl)}</td>'
+        f'<td style="padding:11px 26px 11px 14px;color:#1b1714;font-size:14px;'
+        f'border-bottom:1px solid #f1ece4">{h.escape(val).replace(chr(10), "<br>")}</td></tr>'
+        for lbl, val in items)
+    footer = "<br>".join(f"{h.escape(lbl)}: {h.escape(val)}" for lbl, val in meta)
+    html_body = (
+        '<!DOCTYPE html><html><body style="margin:0;padding:24px;background:#faf8f5;'
+        'font-family:Arial,Helvetica,sans-serif">'
+        '<div style="max-width:560px;margin:0 auto;background:#ffffff;'
+        'border:1px solid #e9e2d7;border-radius:8px;overflow:hidden">'
+        '<div style="padding:18px 26px;background:#732559;color:#ffffff;'
+        f'font-size:17px;font-weight:bold">{h.escape(subject)}</div>'
+        f'<table style="width:100%;border-collapse:collapse">{rows}</table>'
+        '<div style="padding:13px 26px;background:#f1ece4;color:#6a6259;'
+        f'font-size:12px;line-height:1.7">{footer}</div>'
+        '</div></body></html>')
 
     sender = SMTP_USER if (SMTP_USER and SMTP_PASS) else FROM
 
@@ -73,7 +106,8 @@ def _send(data, client_ip):
     msg["Message-ID"] = make_msgid(domain="skeleta.cz")
     if re.fullmatch(r"[^@\s]+@[^@\s]+\.[^@\s]+", reply):
         msg["Reply-To"] = reply
-    msg.set_content("\n".join(lines))
+    msg.set_content(text)
+    msg.add_alternative(html_body, subtype="html")
 
     if SMTP_USER and SMTP_PASS:
         smtp = smtplib.SMTP(SMTP_HOST, SMTP_PORT, timeout=15)
