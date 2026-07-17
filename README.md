@@ -7,6 +7,7 @@ Statický web **Stavební společnosti SKELETA s.r.o.** (Kyjov) pro doménu **sk
 - `img/` — obrázky (logo, hero, reference)
 - `robots.txt`, `sitemap.xml` — SEO
 - `deploy/` — konfigurace pro server (Caddy) + postup nasazení
+- `EDITACE.md` — průvodce úpravami webu (pro editaci obsahu)
 
 Vanilla HTML/CSS/JS, **žádný build** — každá stránka je jeden self-contained soubor
 s inline `<style>` a `<script>`. Editace = úprava souboru + push do `main`;
