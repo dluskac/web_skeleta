@@ -14,8 +14,12 @@ skeleta.cz, www.skeleta.cz {
 	encode gzip zstd
 
 	# Staré adresy z dob Webnode webu, na které vedou odkazy z internetu
-	redir /kontakt /#kontakt permanent
-	redir /kontakt/ /#kontakt permanent
+	redir /kontakt / permanent
+	redir /kontakt/ / permanent
+
+	# Poptávkový formulář → vlastní backend (deploy/poptavka.py, systemd
+	# služba "poptavka"); doručuje přímo na MX, žádná třetí strana
+	reverse_proxy /api/poptavka localhost:8090
 
 	header {
 		# HSTS zprvu jen 1 den; po ~2 týdnech stabilního provozu zvednout na 31536000
@@ -23,8 +27,8 @@ skeleta.cz, www.skeleta.cz {
 		X-Content-Type-Options "nosniff"
 		X-Frame-Options "SAMEORIGIN"
 		Referrer-Policy "strict-origin-when-cross-origin"
-		# POZOR: connect-src musí povolit formsubmit.co, jinak poptávkový formulář neodešle
-		Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://formsubmit.co; frame-src https://www.openstreetmap.org; frame-ancestors 'self'; base-uri 'self'; object-src 'none'"
+		# Formulář jde na vlastní /api/poptavka → stačí connect-src 'self'
+		Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; frame-src https://www.openstreetmap.org; frame-ancestors 'self'; base-uri 'self'; object-src 'none'"
 		-Server
 	}
 

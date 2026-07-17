@@ -79,6 +79,19 @@ systemctl daemon-reload && systemctl enable --now skeleta-pull.timer
 
 Statické soubory čte Caddy přímo z disku — po pullu není potřeba nic restartovat.
 
+## 3b) Poptávkový formulář (vlastní backend)
+
+Formulář webu posílá na `/api/poptavka` — obsluhuje ho `deploy/poptavka.py`
+(systemd služba, port 8090 jen na localhost; Caddy na něj proxuje).
+E-mail se doručuje přímo na MX domény, bez třetích stran a bez hesel.
+
+```bash
+cp /srv/skeleta-web/deploy/poptavka.service /etc/systemd/system/poptavka.service
+systemctl daemon-reload && systemctl enable --now poptavka
+```
+
+Po změně `poptavka.py`: `systemctl restart poptavka` (git pull službu nerestartuje).
+
 ## 4) Ověření po přepnutí DNS
 
 ```bash

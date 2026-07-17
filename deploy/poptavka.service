@@ -1,0 +1,16 @@
+[Unit]
+Description=Poptavkovy formular skeleta.cz (vlastni backend, port 8090)
+After=network-online.target
+
+[Service]
+ExecStart=/usr/bin/python3 /srv/skeleta-web/deploy/poptavka.py
+Restart=always
+RestartSec=3
+User=www-data
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
