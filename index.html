@@ -176,6 +176,14 @@ section{scroll-margin-top:118px}
 .header .nav-links a.nav-cta:hover{background:#e9e9e7;color:var(--ink)}
 .header.scrolled .nav-links a.nav-cta{background:var(--ink);color:#fff;border-color:var(--ink)}
 .header.scrolled .nav-links a.nav-cta:hover{background:#000;color:#fff}
+/* Rychlé tlačítko Půjčovna v hlavičce — jen na mobilu (kde je odkaz schovaný v menu) */
+.pujcovna-quick{display:none;align-items:center;justify-content:center;gap:8px;margin-left:10px;margin-right:auto;
+  height:44px;padding:0 17px;border-radius:var(--radius-sm);background:var(--accent);color:#fff;
+  font-family:var(--display);font-weight:600;font-size:.95rem;white-space:nowrap;line-height:1;
+  box-shadow:0 3px 14px rgba(0,0,0,.14);transition:background var(--ease)}
+.pujcovna-quick:hover{background:var(--accent-hover)}
+.pujcovna-quick svg{width:18px;height:18px;flex:none}
+@media(max-width:680px){.pujcovna-quick{display:inline-flex}}
 
 /* ===== Hero ===== */
 .hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;background:#17130f}
@@ -664,6 +672,11 @@ h1,h2,h3{text-wrap:balance}
       <img class="brand-logo" src="/img/logo.png" alt="SKELETA — Stavební společnost">
     </a>
 
+    <a href="/pujcovna.html" class="pujcovna-quick" aria-label="Přejít do půjčovny nářadí a lešení">
+      <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M10 6v36M22 6v36M34 6v36M6 14h32M6 26h32M6 38h32"/></svg>
+      Půjčovna
+    </a>
+
     <nav class="nav-links" id="navlinks">
       <a href="#sluzby">Služby</a>
       <a href="#reference">Reference</a>
@@ -884,7 +897,6 @@ h1,h2,h3{text-wrap:balance}
         <div class="ref-card-body">
           <h4>Mistřínský Dvůr</h4>
           <div class="rc-meta">Rok realizace: 2025–2026</div>
-          <span class="rc-tag">20 693 032 Kč bez DPH</span>
         </div>
       </article>
       <article class="ref-card">
