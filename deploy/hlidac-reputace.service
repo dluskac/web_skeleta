@@ -1,0 +1,15 @@
+[Unit]
+Description=Hlidac reputace domaci IP (blacklisty, e-mail pres Brevo)
+After=network-online.target
+
+[Service]
+Type=oneshot
+EnvironmentFile=-/etc/poptavka.env
+EnvironmentFile=-/etc/hlidac-reputace.env
+StateDirectory=hlidac-reputace
+ExecStart=/usr/bin/python3 /srv/skeleta-web/deploy/hlidac_reputace.py
+User=www-data
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true

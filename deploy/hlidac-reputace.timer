@@ -1,0 +1,10 @@
+[Unit]
+Description=Denni kontrola reputace domaci IP
+
+[Timer]
+OnCalendar=*-*-* 07:30
+RandomizedDelaySec=15min
+Persistent=true
+
+[Install]
+WantedBy=timers.target

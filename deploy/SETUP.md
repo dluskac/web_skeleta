@@ -92,6 +92,25 @@ systemctl daemon-reload && systemctl enable --now poptavka
 
 Po změně `poptavka.py`: `systemctl restart poptavka` (git pull službu nerestartuje).
 
+## 3c) Hlídač reputace domácí IP
+
+`deploy/hlidac_reputace.py` + timer (denně 7:30) ověří veřejnou IP na Spamhausu
+a dalších blacklistech (přes DNS poskytovatele, s kontrolou 127.0.0.2) a při
+zápisu pošle e-mail přes Brevo; po vyčištění pošle „vyřešeno".
+
+```bash
+printf 'HLIDAC_TO=<e-mail pro upozornění>\n' > /etc/hlidac-reputace.env && chmod 600 /etc/hlidac-reputace.env
+cp /srv/skeleta-web/deploy/hlidac-reputace.service /srv/skeleta-web/deploy/hlidac-reputace.timer /etc/systemd/system/
+systemctl daemon-reload && systemctl enable --now hlidac-reputace.timer
+```
+
+Ruční běh: `systemctl start hlidac-reputace` → `journalctl -u hlidac-reputace`.
+Nanečisto: `python3 /srv/skeleta-web/deploy/hlidac_reputace.py --zkouska`.
+
+Pozadí (10/2026): IP byla na Spamhaus CSS, protože Proxmox posílal upozornění
+napřímo jako `proxmox.lan`. Pojistky: notifikace Proxmoxu přes Brevo, router
+blokuje odchozí TCP 25 (pravidlo s logem `BLOK-SMTP25`), tenhle hlídač.
+
 ## 4) Ověření po přepnutí DNS
 
 ```bash
