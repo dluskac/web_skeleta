@@ -155,6 +155,15 @@ def _build(data, client_ip):
     msg["Message-ID"] = make_msgid(domain=parseaddr(EMAIL_FROM)[1].split("@")[-1])
     if re.fullmatch(r"[^@\s]+@[^@\s]+\.[^@\s]+", reply):
         msg["Reply-To"] = reply
+    # Stejné hlavičky jako services/email.py v BlackTalonu: transakční zpráva,
+    # žádné autoodpovědi a hlavně VYPNUTÉ sledování Brevo — jinak Brevo vloží
+    # sledovací pixel a přepíše odkazy přes svou doménu, což zvedá spamové skóre.
+    msg["Auto-Submitted"] = "auto-generated"
+    msg["X-Auto-Response-Suppress"] = "All"
+    msg["X-Mailin-track-clicks"] = "0"
+    msg["X-Mailin-track-opens"] = "0"
+    msg["X-Sib-Track-Clicks"] = "0"
+    msg["X-Sib-Track-Opens"] = "0"
     msg.set_content(text)
     msg.add_alternative(html_body, subtype="html")
     return msg
