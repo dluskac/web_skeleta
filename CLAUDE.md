@@ -32,20 +32,23 @@ support David Luskač (@dluskac) — na něj odkazuj věci kolem hostingu/deploy
 
 Poptávky jdou na **vlastní backend** `/api/poptavka` (`FORM_ENDPOINT` v obou
 souborech) — malá systemd služba `poptavka` na serveru (`deploy/poptavka.py`),
-která poptávku doručí do `info@skeleta.cz` **přihlášeně** (SMTP ser10, záloha
-IMAP rovnou do schránky). Žádná třetí strana.
+která poptávku pošle do `info@skeleta.cz` přes rozesílací službu **Brevo**
+(stejně jako BlackTalon a Bystrouška; odesílatel = ověřená adresa Brevo).
 Kontrakt odpovědi: JSON `{"success":"true"}` — JS kontrolu
 `if(!r.ok || String(d.success)!=='true') throw 0;` zachovat: když poptávka
 nejde doručit hned, backend vrátí `false` a formulář zákazníkovi nabídne
 **telefon** (kopie čeká ve frontě). Honeypot `_honey` nechat; roboty
 s náhodnými řetězci backend zahazuje sám.
 
-**⚠️ Změna hesla k info@skeleta.cz** → stejné heslo se MUSÍ zapsat i na server
-do `/etc/poptavka.env` (v kontejneru 104) a `systemctl restart poptavka`.
-Jinak se odesílání zastaví (backend zkusí špatné heslo jen jednou — dřív ho
-zkoušel dokola a poštovní server pak zabanoval celou domácí IP pro odesílání).
-Stav a chyby: `journalctl -u poptavka`. Po změně `deploy/poptavka.py` je
-potřeba `systemctl restart poptavka` (git pull službu nerestartuje).
+Přístup k Brevo je v `/etc/poptavka.env` (kontejner 104), převzatý ze stejného
+souboru BlackTalonu (`/opt/blacktalon/.env` v CT103). **Když se změní heslo
+k Brevo u BlackTalonu, převést ho znovu** a `systemctl restart poptavka` —
+jinak se posílání zastaví (backend zkusí špatné heslo jen jednou; dřív ho
+zkoušel dokola a poštovní server pak zabanoval celou domácí IP).
+`EMAIL_FROM` musí být u Brevo **ověřená** adresa — nikdy SMTP login, jinak
+Brevo zprávu převezme a potichu nedoručí. Stav a chyby: `journalctl -u poptavka`.
+Po změně `deploy/poptavka.py` je potřeba `systemctl restart poptavka`
+(git pull službu nerestartuje).
 
 ## Ověření po úpravách
 

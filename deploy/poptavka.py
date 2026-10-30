@@ -1,37 +1,38 @@
 #!/usr/bin/env python3
 """Poptávkový backend webu skeleta.cz.
 
-Přijme JSON z formuláře (POST /api/poptavka, proxované Caddym) a doručí
-poptávku do info@skeleta.cz:
-  1. přihlášeně přes odesílací server vas-hostingu (ser10, port 587) — běžná cesta,
-     projde i přeposílacími pravidly schránky;
-  2. když je SMTP nedostupné (ban/výpadek), vloží ji přes IMAP rovnou do schránky.
-Přihlašovací údaje čte služba z /etc/poptavka.env (SMTP_USER, SMTP_PASS).
+Přijme JSON z formuláře (POST /api/poptavka, proxované Caddym) a pošle poptávku
+do info@skeleta.cz přes rozesílací službu Brevo — stejně jako BlackTalon (CT103)
+a Bystrouška (CT106). Pošta odchází z IP Brevo, takže jí nevadí reputace domácí
+IP ani ban na poštovním serveru vas-hostingu, a heslo k info@ není potřeba.
 
-Pojistky (incident 10/2026: změněné heslo → server ho dál zkoušel → poštovní
-server zabanoval domácí IP pro odesílání a poptávky měsíce ležely ve frontě):
-- neplatné heslo se zkusí JEN JEDNOU; pak se odesílání zastaví, dokud se
-  /etc/poptavka.env nezmění (nové heslo + systemctl restart poptavka),
-- co nejde doručit hned, se uloží do fronty, ALE zákazník dostane „nepodařilo se"
+Konfigurace /etc/poptavka.env (převzatá z /opt/blacktalon/.env v CT103):
+  SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS — přístup k Brevo,
+  EMAIL_FROM — odesílatel; MUSÍ být u Brevo ověřený (ne SMTP login!),
+               jinak Brevo zprávu převezme a potichu nedoručí.
+
+Pojistky (incident 10/2026: neplatné heslo se zkoušelo dokola → ban domácí IP
+a poptávky měsíce ležely ve frontě):
+- neplatné heslo se zkusí JEN JEDNOU; pak se neposílá, dokud se
+  /etc/poptavka.env nezmění (nové údaje + systemctl restart poptavka),
+- co nejde poslat hned, se uloží do fronty, ALE zákazník dostane „nepodařilo se"
   → formulář mu nabídne telefon. Žádná poptávka se už neztratí potichu,
 - roboti s náhodnými řetězci se zahodí (tváříme se spokojeně),
 - všechno jde do journalu: journalctl -u poptavka.
 
 Odpověď drží kontrakt formulářového JS: {"success":"true"} / {"success":"false"}.
 """
-import imaplib
 import json
 import os
 import re
 import smtplib
-import socket
 import ssl
 import sys
 import threading
 import time
 import uuid
 from email.message import EmailMessage
-from email.utils import formatdate, make_msgid
+from email.utils import formatdate, make_msgid, parseaddr
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 STATE_DIR = os.environ.get("STATE_DIRECTORY", "/var/lib/poptavka")
@@ -39,25 +40,12 @@ ENV_FILE = "/etc/poptavka.env"
 AUTH_BAD_FLAG = os.path.join(STATE_DIR, ".heslo-neplatne")
 RETRY_BASE, RETRY_MAX = 1800, 6 * 3600   # fronta: à 30 min, při chybách až à 6 h
 
-
-def _ipv4(host):
-    """Kontejner nemá IPv6 konektivitu — vynutit A záznam, ať se neplýtvá pokusy."""
-    try:
-        return socket.getaddrinfo(host, None, socket.AF_INET)[0][4][0]
-    except Exception:
-        return host
-
-
-def _log(msg):
-    print(msg, file=sys.stderr, flush=True)
-
-
 TO = "info@skeleta.cz"
-MAIL_HOST = "ser10.vas-server.cz"
-SMTP_USER = os.environ.get("SMTP_USER")
-SMTP_PASS = os.environ.get("SMTP_PASS")
-SMTP_HOST = os.environ.get("SMTP_HOST", MAIL_HOST)
-SMTP_PORT = int(os.environ.get("SMTP_PORT", "587"))
+SMTP_HOST = os.environ.get("SMTP_HOST", "")
+SMTP_PORT = int(os.environ.get("SMTP_PORT") or 587)
+SMTP_USER = os.environ.get("SMTP_USER", "")
+SMTP_PASS = os.environ.get("SMTP_PASS", "")
+EMAIL_FROM = os.environ.get("EMAIL_FROM", "")
 MAX_BODY = 64 * 1024
 WINDOW, LIMIT = 3600, 6          # ochrana: max 6 poptávek za hodinu z jedné IP
 _hits = {}
@@ -66,6 +54,10 @@ FIELD_ORDER = ["jmeno", "telefon", "email", "zajem", "naradi", "termin", "zprava
 FIELD_LABELS = {"jmeno": "Jméno a příjmení", "telefon": "Telefon", "email": "E-mail",
                 "zajem": "Co poptává", "naradi": "Nářadí", "termin": "Termín",
                 "zprava": "Zpráva"}
+
+
+def _log(msg):
+    print(msg, file=sys.stderr, flush=True)
 
 
 def _allowed(ip):
@@ -92,9 +84,13 @@ def _is_bot(data):
         _random_token(data.get("zprava")) or _random_token(data.get("termin")))
 
 
+def _configured():
+    return bool(SMTP_HOST and SMTP_USER and SMTP_PASS and "@" in parseaddr(EMAIL_FROM)[1])
+
+
 def _can_send():
-    """Odesílat jen s heslem, které jsme ještě neviděli selhat."""
-    if not (SMTP_USER and SMTP_PASS):
+    """Posílat jen s úplnou konfigurací a heslem, které jsme ještě neviděli selhat."""
+    if not _configured():
         return False
     try:
         if os.path.getmtime(AUTH_BAD_FLAG) >= os.path.getmtime(ENV_FILE):
@@ -107,7 +103,7 @@ def _can_send():
 def _auth_failed():
     with open(AUTH_BAD_FLAG, "w") as f:
         f.write(time.strftime("%Y-%m-%d %H:%M"))
-    _log("HESLO NEPLATNÉ — odesílání zastaveno, dokud se nezmění /etc/poptavka.env")
+    _log("HESLO NEPLATNÉ — posílání zastaveno, dokud se nezmění /etc/poptavka.env")
 
 
 def _build(data, client_ip):
@@ -153,10 +149,10 @@ def _build(data, client_ip):
 
     msg = EmailMessage()
     msg["Subject"] = subject
-    msg["From"] = f"Web skeleta.cz <{SMTP_USER}>"
+    msg["From"] = EMAIL_FROM
     msg["To"] = TO
     msg["Date"] = formatdate(localtime=True)
-    msg["Message-ID"] = make_msgid(domain="skeleta.cz")
+    msg["Message-ID"] = make_msgid(domain=parseaddr(EMAIL_FROM)[1].split("@")[-1])
     if re.fullmatch(r"[^@\s]+@[^@\s]+\.[^@\s]+", reply):
         msg["Reply-To"] = reply
     msg.set_content(text)
@@ -164,61 +160,33 @@ def _build(data, client_ip):
     return msg
 
 
-def _send_smtp(msg):
-    smtp = smtplib.SMTP(_ipv4(SMTP_HOST), SMTP_PORT, timeout=10)
+def _send(data, client_ip):
+    """Poslat přes Brevo, nebo vyhodit výjimku. Neplatné heslo zastaví další pokusy."""
+    if not _can_send():
+        raise RuntimeError("posílání zastaveno (chybí konfigurace nebo neplatné heslo)")
+    msg = _build(data, client_ip)
+    ctx = ssl.create_default_context()
+    if SMTP_PORT == 465:
+        smtp = smtplib.SMTP_SSL(SMTP_HOST, SMTP_PORT, timeout=20, context=ctx)
+    else:
+        smtp = smtplib.SMTP(SMTP_HOST, SMTP_PORT, timeout=20)
     try:
         smtp.ehlo()
-        smtp.starttls(context=ssl.create_default_context()
-                      if SMTP_HOST == MAIL_HOST else None)
-        smtp.ehlo()
+        if SMTP_PORT != 465:
+            smtp.starttls(context=ctx)
+            smtp.ehlo()
         try:
             smtp.login(SMTP_USER, SMTP_PASS)
         except smtplib.SMTPAuthenticationError:
             _auth_failed()
             raise
+        # obálka jako u BlackTalonu (SMTP login), hlavička From = ověřený odesílatel
         smtp.send_message(msg, from_addr=SMTP_USER, to_addrs=[TO])
     finally:
         try:
             smtp.quit()
         except Exception:
             pass
-
-
-def _send_imap(msg):
-    """Záloha: vložit poptávku rovnou do schránky (IMAP ban ani blacklist nemá)."""
-    imap = imaplib.IMAP4_SSL(MAIL_HOST, 993, ssl_context=ssl.create_default_context(),
-                             timeout=15)
-    try:
-        try:
-            imap.login(SMTP_USER, SMTP_PASS)
-        except imaplib.IMAP4.error:
-            _auth_failed()
-            raise
-        typ, _ = imap.append("INBOX", "", imaplib.Time2Internaldate(time.time()),
-                             msg.as_bytes())
-        if typ != "OK":
-            raise RuntimeError(f"IMAP APPEND: {typ}")
-    finally:
-        try:
-            imap.logout()
-        except Exception:
-            pass
-
-
-def _send(data, client_ip):
-    """Doručit, nebo vyhodit výjimku. Neplatné heslo zastaví další pokusy."""
-    if not _can_send():
-        raise RuntimeError("odesílání zastaveno (chybí nebo neplatné heslo)")
-    msg = _build(data, client_ip)
-    try:
-        _send_smtp(msg)
-        return "SMTP"
-    except smtplib.SMTPAuthenticationError:
-        raise
-    except Exception as e:
-        _log(f"SMTP nedostupné ({type(e).__name__}) — zkouším IMAP do schránky")
-    _send_imap(msg)
-    return "IMAP"
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -250,15 +218,15 @@ class Handler(BaseHTTPRequestHandler):
             if not _allowed(ip):
                 return self._json(429, False)
             try:
-                how = _send(data, ip)
-                _log(f"poptávka doručena přes {how} ({ip})")
+                _send(data, ip)
+                _log(f"poptávka odeslána ({ip})")
                 return self._json(200, True)
             except Exception as e:
-                _log(f"poptávku nešlo doručit ({type(e).__name__}: {str(e)[:100]}) — "
+                _log(f"poptávku nešlo poslat ({type(e).__name__}: {str(e)[:100]}) — "
                      f"uložena do fronty, zákazníkovi nabídnut telefon ({ip})")
             _enqueue(data, ip)
             # Zákazník se dozví, že to neprošlo, a formulář mu nabídne telefon;
-            # kopie ve frontě se doručí, až odesílání zase půjde.
+            # kopie ve frontě se pošle, až posílání zase půjde.
             return self._json(200, False)
         except Exception:
             return self._json(200, False)
@@ -282,27 +250,27 @@ def _retry_loop():
         try:
             names = sorted(n for n in os.listdir(STATE_DIR) if n.endswith(".json"))
             if names and not _can_send():
-                _log(f"fronta: čeká {len(names)} poptávek, odesílání zastaveno (heslo)")
+                _log(f"fronta: čeká {len(names)} poptávek, posílání zastaveno (konfigurace/heslo)")
                 names = []
             for name in names:
                 path = os.path.join(STATE_DIR, name)
                 with open(path, encoding="utf-8") as f:
                     item = json.load(f)
-                how = _send(item["data"], item.get("ip", "?"))
+                _send(item["data"], item.get("ip", "?"))
                 os.remove(path)
-                _log(f"fronta: doručeno přes {how}: {name}")
+                _log(f"fronta: odesláno {name}")
         except Exception as e:
-            _log(f"fronta: doručení selhalo ({type(e).__name__}) — zkusím později")
+            _log(f"fronta: posílání selhalo ({type(e).__name__}) — zkusím později")
             ok = False
         delay = RETRY_BASE if ok else min(max(delay * 2, RETRY_BASE), RETRY_MAX)
 
 
 if __name__ == "__main__":
-    if not (SMTP_USER and SMTP_PASS):
-        _log("START: chybí SMTP_USER/SMTP_PASS v /etc/poptavka.env — poptávky jen do fronty")
+    if not _configured():
+        _log("START: neúplná konfigurace v /etc/poptavka.env — poptávky jen do fronty")
     elif not _can_send():
         _log("START: heslo už jednou neprošlo — čekám na nové v /etc/poptavka.env")
     else:
-        _log(f"START: odesílám přihlášeně jako {SMTP_USER} (SMTP {SMTP_HOST}, záloha IMAP)")
+        _log(f"START: posílám přes {SMTP_HOST}:{SMTP_PORT} jako {EMAIL_FROM}")
     threading.Thread(target=_retry_loop, daemon=True).start()
     ThreadingHTTPServer(("127.0.0.1", 8090), Handler).serve_forever()
