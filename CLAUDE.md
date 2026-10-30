@@ -32,12 +32,20 @@ support David Luskač (@dluskac) — na něj odkazuj věci kolem hostingu/deploy
 
 Poptávky jdou na **vlastní backend** `/api/poptavka` (`FORM_ENDPOINT` v obou
 souborech) — malá systemd služba `poptavka` na serveru (`deploy/poptavka.py`),
-která e-mail doručí přímo na poštovní server domény (MX). Žádná třetí strana.
+která poptávku doručí do `info@skeleta.cz` **přihlášeně** (SMTP ser10, záloha
+IMAP rovnou do schránky). Žádná třetí strana.
 Kontrakt odpovědi: JSON `{"success":"true"}` — JS kontrolu
-`if(!r.ok || String(d.success)!=='true') throw 0;` zachovat (při chybě nabídne
-telefon). Honeypot pole `_honey` nechat (backend ho zná a bota tiše odbyde).
-Po změně `deploy/poptavka.py` je na serveru potřeba `systemctl restart poptavka`
-(git pull soubor stáhne, ale službu nerestartuje).
+`if(!r.ok || String(d.success)!=='true') throw 0;` zachovat: když poptávka
+nejde doručit hned, backend vrátí `false` a formulář zákazníkovi nabídne
+**telefon** (kopie čeká ve frontě). Honeypot `_honey` nechat; roboty
+s náhodnými řetězci backend zahazuje sám.
+
+**⚠️ Změna hesla k info@skeleta.cz** → stejné heslo se MUSÍ zapsat i na server
+do `/etc/poptavka.env` (v kontejneru 104) a `systemctl restart poptavka`.
+Jinak se odesílání zastaví (backend zkusí špatné heslo jen jednou — dřív ho
+zkoušel dokola a poštovní server pak zabanoval celou domácí IP pro odesílání).
+Stav a chyby: `journalctl -u poptavka`. Po změně `deploy/poptavka.py` je
+potřeba `systemctl restart poptavka` (git pull službu nerestartuje).
 
 ## Ověření po úpravách
 
